@@ -59,7 +59,9 @@ const UpdateScriptPage = () => {
         <div className="input_label">통합 JS - CAFE24</div>
         <TextArea autoSize={{ minRows: 10 }} size="small" onChange={onChangeTextValue} value={textAreaValue} />
       </div>
-      <Button className="mt-4" onClick={onClick}>통합 스크립트 저장</Button>
+      <Button className="mt-4" onClick={onClick}>
+        통합 스크립트 저장
+      </Button>
     </Wrapper>
   );
 };
@@ -76,9 +78,6 @@ const Wrapper = styled.div`
     margin-top: 5px;
     font-size: 12px;
     color: #666;
-    &:before {
-      content: "✅ ";
-    }
   }
   .input_label {
     font-size: 14px;

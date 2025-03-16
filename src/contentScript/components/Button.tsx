@@ -19,20 +19,21 @@ const Wrapper = styled.button`
   width: 100%;
   padding: 8px 0;
 
-  background: none;
-  background-color: ${theme.color.main};
-  color: ${theme.color.secondary};
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+
   &.kg_secondary {
     background-color: ${theme.color.white};
-    color: ${theme.color.main};
-    border: 2px solid ${theme.color.main};
+    color: #333;
+    border: 1px solid #b6b5b5;
     &:hover {
       background-color: ${theme.color.light};
     }
   }
 
   border: none;
-  border-radius: 50px;
+  border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
   font-weight: bold;

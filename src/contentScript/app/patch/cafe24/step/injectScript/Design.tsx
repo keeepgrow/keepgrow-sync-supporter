@@ -77,7 +77,7 @@ const Cafe24DesignPage = () => {
           <AButton type="dashed" onClick={onClickScriptCopy}>
             통합 스크립트
           </AButton>
-          <div>계정 연동 스크립트</div>
+          <div className="script_title">계정 연동 스크립트</div>
           <div className="script_box">
             <AButton type="dashed" onClick={() => onClickMappingSciprtCopy("pc")}>
               PC
@@ -112,6 +112,9 @@ const Wrapper = styled.div`
         flex: 1;
       }
     }
+  }
+  .script_title{
+    font-size: 12px;
   }
 `;
 

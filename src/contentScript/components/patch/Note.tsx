@@ -12,7 +12,7 @@ const PatchNote = () => {
     <>
       <Wrapper onClick={() => setOpenNote(true)}>
         <div className="note_title">Note</div>
-        <img className="memo_img" src={Chrome.getUrl("note.png")} />
+        {/* <img className="memo_img" src={Chrome.getUrl("note.png")} /> */}
       </Wrapper>
       {openNote && <NoteModal setOpen={setOpenNote} />}
     </>
@@ -20,29 +20,17 @@ const PatchNote = () => {
 };
 
 const Wrapper = styled.div`
-  width: 150px;
-  height: 60px;
-  padding: 0 15px;
-  background-color: ${theme.color.secondary};
-  border: 2px solid ${theme.color.main};
-  border-radius: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  left: 10px;
   .note_title {
-    font-size: 16px;
+    font-size: 12px;
     font-weight: bold;
-    color: ${theme.color.main};
-  }
-  .memo_img {
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-  }
-  margin-bottom: 20px;
-  &:hover {
-    opacity: 0.8;
+    margin-bottom: 20px;
+    color: #333;
+    &:hover {
+      color: ${theme.color.main};
+    }
   }
 `;
 

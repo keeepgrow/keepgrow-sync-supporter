@@ -154,7 +154,7 @@ const UpdateMetaJsonPage = () => {
 
 const Wrapper = styled.div`
   .metaJson_input_box {
-    margin-bottom: 15px;
+    margin-bottom: 4px;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -162,17 +162,17 @@ const Wrapper = styled.div`
   .input_wrapper {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 7px;
     .input_label {
       font-size: 14px;
       font-weight: 600;
       color: #333;
       &.highlight {
-        color: #1890ff;
+        color: #333;
         font-weight: 700;
         &:before {
           content: "* ";
-          color: #1890ff;
+          color: #2424b3;
         }
         span {
           color: #919191;

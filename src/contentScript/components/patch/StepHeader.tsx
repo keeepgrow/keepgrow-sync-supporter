@@ -33,9 +33,6 @@ const PatchStepHeader = ({ steps, step }: Props) => {
 
 const Wrapper = styled.div`
   margin-bottom: 20px;
-  background: linear-gradient(145deg, #0e3a7c, #133564);
-  padding: 10px 15px 30px 15px;
-  border-radius: 15px;
 
   .header_flex_box {
     display: flex;
@@ -46,46 +43,44 @@ const Wrapper = styled.div`
       cursor: pointer;
     }
     .step_now {
-      margin: 10px 0;
+      width: 100%;
+      text-align: center;
       font-weight: bold;
-      font-size: 16px;
-      margin-bottom: 20px;
-      color: ${theme.color.secondary};
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: #333;
     }
   }
   .step_wrapper {
-    width: 100%;
-    background-color: ${theme.color.white};
-    border-radius: 50px;
     margin-top: 10px;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2px 60px;
+    padding: 2px 20px;
   }
 
   .step {
     padding: 10px;
-    width: 15px;
-    height: 15px;
-    font-size: 12px;
+    width: 12px;
+    height: 12px;
+    font-size: 10px;
     display: flex;
     justify-content: center;
+    font-weight: 500;
     align-items: center;
-    /* background-color: ${theme.color.secondary}; */
-    color: ${theme.color.font};
+    background-color: #eaeaea;
 
     border-radius: 30px;
     cursor: pointer;
     &:hover {
-      background-color: ${theme.color.secondary};
+      background-color: #c6c6c6
     }
   }
 
   .active {
-    color: ${theme.color.secondary};
-    background-color: ${theme.color.main};
+    color: #fff;
+    background-color: #333;
     font-weight: bold;
     &:hover {
       background-color: ${theme.color.font};

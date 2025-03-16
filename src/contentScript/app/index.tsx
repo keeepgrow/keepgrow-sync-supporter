@@ -22,12 +22,7 @@ const ContentScriptApp = () => {
 };
 
 const Wrapper = styled.div`
-  position: absolute;
-  top: 4px;
-  right: 15px;
-  font-size: 20px;
-  border: none;
-  cursor: pointer;
+
   .kg-close-button {
     position: absolute;
     top: 10px;

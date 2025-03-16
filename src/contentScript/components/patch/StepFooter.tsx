@@ -31,7 +31,7 @@ const Wrapper = styled.div`
     width: fit-content;
     margin: auto;
     border-radius: 10px;
-    margin-top: 50px;
+    margin-top: 10px;
     display: flex;
     justify-content: space-around;
     padding: 10px 0;
@@ -45,13 +45,14 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    color: ${theme.color.font};
+    color: #b2b2b2;
     cursor: pointer;
+    &:hover {
+      color: #4f4f4f;
+    }
   }
   .active {
-    color: ${theme.color.main};
-    background-color: ${theme.color.light};
-    border-radius: 50%;
+    color: #333;
     font-weight: bold;
   }
 `;

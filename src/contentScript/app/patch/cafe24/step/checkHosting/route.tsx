@@ -43,7 +43,6 @@ const MoveHosting = () => {
     <>
       {page === steps.cmsModify && <CheckHostingPage />}
       {page === steps.login && <Cafe24LoginPage />}
-
       {page === steps.cafe24 && <Cafe24Home />}
       {page === steps.nm && <NotMatchingPage />}
       <PathStepFooter steps={steps} step={page} setPage={setPage} />

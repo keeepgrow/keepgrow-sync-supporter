@@ -23,7 +23,7 @@ const PatchCafe24Page = () => {
 
   return (
     <Wrapper>
-      <div className="sidepanel_title">CAFE24</div>
+      <div className="sidepanel_title">CAFE24 패치</div>
       <PatchNote />
       <PatchStepHeader steps={steps} step={step} />
       {step === 1 && <CheckHosting />}
@@ -37,8 +37,13 @@ const PatchCafe24Page = () => {
 
 const Wrapper = styled.section`
   padding: 20px 12px;
+  position: relative;
+  height: 100%;
+
   .sidepanel_title {
-    font-size: 32px;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
     font-weight: bold;
     margin-bottom: 20px;
   }

@@ -16,24 +16,26 @@ const SquareButton = (props: Props) => {
 };
 
 const Wrapper = styled.button`
-  width: 100%;
-  padding: 16px 0;
+  width: 100px;
+  padding: 4px 0;
+  cursor: pointer;
 
   background: none;
-  background-color: ${theme.color.main};
-  color: ${theme.color.secondary};
+  background-color: #333;
+  color: #fff;
   &.kg_secondary {
-    background-color: ${theme.color.secondary};
-    color: ${theme.color.main};
+    background-color: #fff;
+    border: 1px solid #b6b5b5;
+    color: #333;
     &:hover {
       background-color: ${theme.color.light};
     }
   }
 
   border: none;
-  border-radius: 15px;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
   transition: all 0.3s;
   &:hover {

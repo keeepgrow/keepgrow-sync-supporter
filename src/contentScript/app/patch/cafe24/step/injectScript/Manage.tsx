@@ -44,12 +44,12 @@ const Cafe24ManagePage = () => {
             MOBILE
           </Button>
         </div>
-      </div>
-      <div className="kg_btn_box">
-        <SquareButton color="secondary" onClick={onClickEnd}>
-          패치 종료
-        </SquareButton>
-        <SquareButton onClick={onClickNewPatch}>새 패치 시작</SquareButton>
+        <div className="kg_btn_box">
+          <SquareButton color="secondary" onClick={onClickEnd}>
+            패치 종료
+          </SquareButton>
+          <SquareButton onClick={onClickNewPatch}>새 패치 시작</SquareButton>
+        </div>
       </div>
     </Wrapper>
   );
@@ -58,13 +58,14 @@ const Cafe24ManagePage = () => {
 const Wrapper = styled.div`
   .button_box {
     display: flex;
+    flex-direction: column;
     gap: 10px;
     justify-content: center;
   }
   .kg_btn_box {
     display: flex;
     gap: 10px;
-    justify-content: center;
+    justify-content: space-around;
     margin-top: 20px;
   }
 `;

@@ -43,15 +43,13 @@ const Wrapper = styled.div`
   background-color: ${theme.color.white};
   .checkitem {
     color: #333;
-    width: 100%;
     font-weight: 600;
     font-size: 12px;
-    margin-bottom: 8px;
     padding: 10px 20px;
     cursor: pointer;
     &.done {
       text-decoration: line-through;
-      background-color: ${theme.color.secondary};
+      background-color: #c5c5c56d;
       color: ${theme.color.main};
     }
   }

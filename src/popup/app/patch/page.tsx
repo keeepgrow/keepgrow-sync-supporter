@@ -12,7 +12,7 @@ const PatchSelectPage = () => {
       </div>
       <div className="flex_box mt-3">
         {hostings.map((hosting) => (
-          <Button key={hosting} size="large" type="primary" block>
+          <Button key={hosting} size="large" type="primary" color="default" block>
             <Link to={`${hosting}`}>{hosting.toUpperCase()} </Link>
           </Button>
         ))}

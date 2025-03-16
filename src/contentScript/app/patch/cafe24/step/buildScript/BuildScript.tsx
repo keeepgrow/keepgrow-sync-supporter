@@ -78,9 +78,10 @@ const BuildScriptPage = () => {
 const Wrapper = styled.div`
   .button_box {
     display: flex;
+    flex-direction: column;
     gap: 10px;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     color: #eaeaea;
   }
 `;

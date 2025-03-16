@@ -37,7 +37,7 @@ const PopupMainPage = () => {
       </div>
 
       <div className="flex_box mt-3">
-        <Button size="large" type="primary" block>
+        <Button size="large" type="primary" block color="default">
           <Link to="/patch">패치 시작하기</Link>
         </Button>
         <Button size="large" block disabled>

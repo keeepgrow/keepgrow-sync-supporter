@@ -1,23 +1,29 @@
 .kg-sidepanel {
-  width: 350px;
-  height: 90vh;
+  width: 360px;
+  max-height: 90vh;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   position: fixed;
-  top: 30px;
+  bottom: 100px;
   right: 50px;
-  border-radius: 30px;
+  border-radius: 20px;
   z-index: 10000;
   overflow-y: auto;
   opacity: 0.7;
-  color: #34465c;
+  color: #333;
   font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
 }
 
 .kg-sidepanel-content {
   position: relative;
+  width: 340px;
+
   padding: 10px;
-  padding-bottom: 15vh;
+  padding-bottom: 10vh;
 }
 .kg-sidepanel:hover {
   opacity: 1;
@@ -37,21 +43,20 @@
 
 /* kg css */
 .kg_con {
-  padding: 20px 10px 30px 10px;
-  background-color: #eff1fa;
-  width: 100%;
-  border-radius: 15px;
+  padding: 20px 10px 40px 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
 }
 .kg_con input {
   border-radius: 5px;
 }
 .kg_title {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   margin-bottom: 10px;
 }
 .kg_sub {
-  font-size: 14px;
+  font-size: 12px;
   margin-bottom: 20px;
   font-weight: semi-bold;
 }

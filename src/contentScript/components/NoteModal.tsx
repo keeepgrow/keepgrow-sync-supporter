@@ -63,6 +63,8 @@ const Wrapper = styled.div`
   .btn_box {
     margin-top: 20px;
     width: 88%;
+    display: flex;
+    justify-content: center;
   }
   .note_content {
     position: relative;
