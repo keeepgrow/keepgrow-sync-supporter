@@ -84,7 +84,6 @@ const UpdateMetaJsonPage = () => {
   };
 
   const highlightFields = [
-    "KGJS_logoName",
     "KGJS_accessKey",
     "KGJS_domain",
     "KGJS_uiHide",
