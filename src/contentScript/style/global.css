@@ -1,0 +1,75 @@
+.kg-sidepanel {
+  width: 350px;
+  height: 90vh;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 30px;
+  right: 50px;
+  border-radius: 30px;
+  z-index: 10000;
+  overflow-y: auto;
+  opacity: 0.7;
+  color: #34465c;
+  font-size: 14px;
+}
+
+.kg-sidepanel-content {
+  position: relative;
+  padding: 10px;
+  padding-bottom: 15vh;
+}
+.kg-sidepanel:hover {
+  opacity: 1;
+}
+
+.kg-sidepanel button {
+  text-indent: 0;
+}
+
+.flex_box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+/* kg css */
+.kg_con {
+  padding: 20px 10px 30px 10px;
+  background-color: #eff1fa;
+  width: 100%;
+  border-radius: 15px;
+}
+.kg_con input {
+  border-radius: 5px;
+}
+.kg_title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.kg_sub {
+  font-size: 14px;
+  margin-bottom: 20px;
+  font-weight: semi-bold;
+}
+
+/* margin */
+
+.mt-1 {
+  margin-top: 4px;
+}
+.mt-2 {
+  margin-top: 8px;
+}
+.mt-3 {
+  margin-top: 12px;
+}
+.mt-4 {
+  margin-top: 16px;
+}
+.mt-5 {
+  margin-top: 20px;
+}
