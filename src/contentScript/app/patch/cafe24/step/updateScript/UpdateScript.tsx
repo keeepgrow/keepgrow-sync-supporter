@@ -18,18 +18,23 @@ const UpdateScriptPage = () => {
     onChange: onChangeTextValue
   } = useInput(scriptContent["CAFE24"](src, dataEnvMobile));
 
-  const getUrl = () => {
-    const element = document.querySelector("#integratedScript");
-    console.log(element);
+  const getUrl = async () => {
+    const getElement = async (retryCount = 2) => {
+      for (let i = 0; i < retryCount; i++) {
+        let element = document.querySelector("#integratedScript");
+        if (element) return element;
+        await new Promise((resolve) => setTimeout(resolve, 300));
+      }
+      return document.querySelector("#integratedScript");
+    };
+    const element = await getElement();
     if (!element) return;
     const match = element.innerHTML.match(/src="([^"]+)"/);
     if (match) setSrc(match[1]);
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      getUrl();
-    }, 300);
+    getUrl();
   }, []);
 
   useEffect(() => {
