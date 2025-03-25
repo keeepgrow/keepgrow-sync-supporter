@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Checkbox, Input, message } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import { usePatchData } from "../../../../../../popup/store/patchData";
+import { usePatchData } from "../../../../popup/store/patchData";
 import { useNavigate } from "react-router-dom";
 import Alert from "antd/es/alert/Alert";
-import Button from "../../../../../components/Button";
+import Button from "../../Button";
 
-const UpdateMetaJsonPage = () => {
+const UpdateMetaJsonPage = ({ hosting }: { hosting: "CAFE24" | "IMWEB" }) => {
   const navigate = useNavigate();
   const [inputFields, setInputFields] = useState({
     KGJS_responsive: false,
@@ -83,13 +83,13 @@ const UpdateMetaJsonPage = () => {
       .replace(/%COLON%/g, ":"); // URL의 원래 콜론 복원
   };
 
-  const highlightFields = [
-    "KGJS_accessKey",
-    "KGJS_domain",
-    "KGJS_uiHide",
-    "KGJS_responsive",
-    "KGJS_shopName"
-  ];
+  // 호스팅별 필수값
+  const HOSTING_REQUIRED_FIELDS = {
+    CAFE24: ["KGJS_accessKey", "KGJS_domain", "KGJS_uiHide", "KGJS_responsive", "KGJS_shopName"],
+    IMWEB: ["KGJS_domain", "KGJS_shopName", "KGJS_uiHide"]
+  };
+
+  const highlightFields = HOSTING_REQUIRED_FIELDS[hosting];
   const getLabelClass = (key) => (highlightFields.includes(key) ? "highlight input_label" : "input_label");
 
   const onClick = async () => {

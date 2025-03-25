@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { usePatchData } from "../../../../popup/store/patchData";
-import Button from "../../Button";
+import { usePatchData } from "../../../../../../popup/store/patchData";
+import Button from "../../../../../components/Button";
 
 const Cafe24LoginPage = () => {
   const [userInfo, setUserInfo] = useState({ id: "", password: "" });

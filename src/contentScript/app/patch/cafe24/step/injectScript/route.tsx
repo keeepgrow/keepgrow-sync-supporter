@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Cafe24LoginPage from "../../../../../components/patch/cafe24/Login";
+import Cafe24LoginPage from "../checkHosting/Cafe24Login";
 import Cafe24MainPage from "./MainPage";
 import NotMatchingPage4 from "./NotMatchingPage";
 import Cafe24ManagePage from "./Manage";

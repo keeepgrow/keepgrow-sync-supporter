@@ -3,6 +3,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import MainPage from "./main/page";
 import { usePatchData } from "../../popup/store/patchData";
 import PatchCafe24Page from "./patch/cafe24/page";
+import PatchImwebPage from "./patch/imweb/page";
 
 const Router = () => {
   const navigate = useNavigate();
@@ -15,9 +16,7 @@ const Router = () => {
   const route = async () => {
     const patchData = await getPatchData();
     if (patchData) {
-      return navigate(
-        `/patch/${patchData.hosting}/${Number(patchData.step || 1)}`
-      );
+      return navigate(`/patch/${patchData.hosting}/${Number(patchData.step || 1)}`);
     }
 
     return navigate("/main");
@@ -28,6 +27,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/patch/cafe24/:step" element={<PatchCafe24Page />} />
+        <Route path="/patch/imweb/:step" element={<PatchImwebPage />} />
       </Routes>
     </>
   );

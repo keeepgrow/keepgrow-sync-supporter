@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import UpdateMetaJsonPage from "./UpdateMetaJson";
-import NotMatchingPage from "../../../../../components/patch/NotMatchingPage";
-import PathStepFooter from "../../../../../components/patch/StepFooter";
+import NotMatchingPage from "../../patch/NotMatchingPage";
+import PathStepFooter from "../../patch/StepFooter";
 
-const UpdateMetaJson = () => {
+const UpdateMetaJson = ({ hosting }: { hosting: "CAFE24" | "IMWEB" }) => {
   const location = window.location.href;
 
   const urlMatch = ["gateway.keepgrow.com/cms/setting/processes", "modify"];
@@ -22,7 +22,7 @@ const UpdateMetaJson = () => {
 
   return (
     <>
-      {page === steps.match && <UpdateMetaJsonPage />}
+      {page === steps.match && <UpdateMetaJsonPage hosting={hosting} />}
       {page === steps.nm && <NotMatchingPage />}
       <PathStepFooter steps={steps} step={page} setPage={setPage} />
     </>

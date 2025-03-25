@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import NotMatchingPage from "../../../../../components/patch/NotMatchingPage";
-import CheckHostingPage from "../../../../../components/common/CheckHosting";
-import Cafe24LoginPage from "./Cafe24Login";
-import Cafe24Home from "./Cafe24Home";
+
 import PathStepFooter from "../../../../../components/patch/StepFooter";
+import CheckHostingPage from "../../../../../components/common/CheckHosting";
+import ImwebLoginPage from "./ImwebLogin";
+import ImwebMysitePage from "./Mysite";
+import ImwebLogin2Page from "./ImwebLogin2";
 
 const MoveHosting = () => {
   const location = window.location.href;
@@ -12,7 +14,9 @@ const MoveHosting = () => {
 
   enum steps {
     login,
-    cafe24,
+    login2,
+    imweb,
+    mysite,
     cmsModify,
     nm
   }
@@ -20,12 +24,20 @@ const MoveHosting = () => {
   const [page, setPage] = useState(steps.nm);
 
   const urlCheck = () => {
-    if (location.includes("eclogin.cafe24.com/Shop")) {
+    if (location.includes("imweb.me/login")) {
       setPage(steps.login);
       return;
     }
-    if (location.includes("cafe24.com")) {
-      setPage(steps.cafe24);
+    if (location.includes("imweb.me/mysite")) {
+      setPage(steps.mysite);
+      return;
+    }
+    if (location.includes("imweb.com")) {
+      setPage(steps.imweb);
+      return;
+    }
+    if (location.includes("/admin/?type=page")) {
+      setPage(steps.login2);
       return;
     }
 
@@ -41,9 +53,10 @@ const MoveHosting = () => {
 
   return (
     <>
-      {page === steps.cmsModify && <CheckHostingPage hosting="CAFE24" />}
-      {page === steps.login && <Cafe24LoginPage />}
-      {page === steps.cafe24 && <Cafe24Home />}
+      {page === steps.cmsModify && <CheckHostingPage hosting="IMWEB" />}
+      {page === steps.login && <ImwebLoginPage />}
+      {page === steps.login2 && <ImwebLogin2Page />}
+      {page === steps.mysite && <ImwebMysitePage />}
       {page === steps.nm && <NotMatchingPage />}
       <PathStepFooter steps={steps} step={page} setPage={setPage} />
     </>

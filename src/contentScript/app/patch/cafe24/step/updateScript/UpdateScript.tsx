@@ -21,7 +21,7 @@ const UpdateScriptPage = () => {
   const getUrl = async () => {
     const getElement = async (retryCount = 2) => {
       for (let i = 0; i < retryCount; i++) {
-        let element = document.querySelector("#integratedScript");
+        const element = document.querySelector("#integratedScript");
         if (element) return element;
         await new Promise((resolve) => setTimeout(resolve, 300));
       }

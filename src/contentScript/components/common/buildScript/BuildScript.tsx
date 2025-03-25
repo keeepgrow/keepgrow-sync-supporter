@@ -1,15 +1,25 @@
 import { message } from "antd";
 import React from "react";
 import styled from "styled-components";
-import { usePatchData } from "../../../../../../popup/store/patchData";
+
 import { useNavigate } from "react-router-dom";
-import BottomLayout from "../../../../../components/layout/bottom";
-import Button from "../../../../../components/Button";
+import { usePatchData } from "../../../../popup/store/patchData";
+import Button from "../../Button";
 
-const CAFE24_ID = "CAFE24_ACCOUNT_SHOP_ID";
-const CAFE24_PW = "CAFE24_ACCOUNT_PASSWORD";
+const HOSTING_INFO = {
+  CAFE24: {
+    ID: "CAFE24_ACCOUNT_SHOP_ID",
+    PW: "CAFE24_ACCOUNT_PASSWORD",
+    BUILD_BUTTON: "#build-cafe24-init"
+  },
+  IMWEB: {
+    ID: "IMWEB_ACCOUNT_ID",
+    PW: "IMWEB_ACCOUNT_PASSWORD",
+    BUILD_BUTTON: "#build-imweb-init"
+  }
+};
 
-const BuildScriptPage = () => {
+const BuildScriptPage = ({ hosting }: { hosting: "CAFE24" | "IMWEB" }) => {
   const navigate = useNavigate();
   const onClickSaveAccount = async () => {
     const userInfo = { id: "", password: "" };
@@ -17,14 +27,14 @@ const BuildScriptPage = () => {
     document.querySelectorAll("tr.asset-row").forEach((element) => {
       const labelSpan = element.querySelector("td:nth-of-type(2) .d-inline");
 
-      if (labelSpan && labelSpan.textContent.trim() === CAFE24_ID) {
+      if (labelSpan && labelSpan.textContent.trim() === HOSTING_INFO[hosting].ID) {
         const inputField = element.querySelector("td:nth-of-type(3) .d-inline input") as HTMLInputElement;
 
         if (inputField) {
           userInfo.id = inputField.value.trim();
         }
       }
-      if (labelSpan && labelSpan.textContent.trim() === CAFE24_PW) {
+      if (labelSpan && labelSpan.textContent.trim() === HOSTING_INFO[hosting].PW) {
         const inputField = element.querySelector("td:nth-of-type(3) .d-inline input") as HTMLInputElement;
 
         if (inputField) {
@@ -41,7 +51,7 @@ const BuildScriptPage = () => {
   };
 
   const onClickHostingBuild = () => {
-    const button = document.querySelector("#build-cafe24-init") as HTMLButtonElement;
+    const button = document.querySelector(HOSTING_INFO[hosting].BUILD_BUTTON) as HTMLButtonElement;
     if (button) button.click();
   };
   const onClickJsBuild = () => {

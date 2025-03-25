@@ -19,6 +19,12 @@ const togglePanel = async () => {
   element.style.display = visibility ? "none" : "block";
 };
 
+const closePanel = async () => {
+  const element = getPanel() as HTMLElement;
+  if (!element) return;
+  element.style.display = "none";
+};
+
 const isVisibility = async () => {
   const visibility = await Storage.GET(PANEL_VISIBILITY);
 
@@ -94,4 +100,5 @@ export const SidepanelService = {
   getPanel,
   createtIcon,
   togglePanel,
+  closePanel
 };
