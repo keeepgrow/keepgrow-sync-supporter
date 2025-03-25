@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-import NotMatchingPage from "../../../../../components/patch/NotMatchingPage";
+import NotMatchingPage from "../../patch/NotMatchingPage";
 import UpdateScriptPage from "./UpdateScript";
-import PathStepFooter from "../../../../../components/patch/StepFooter";
+import PathStepFooter from "../../patch/StepFooter";
 
-const UpdateScript = () => {
+const UpdateScript = ({ hosting }: { hosting: "CAFE24" | "IMWEB" }) => {
   const location = window.location.href;
 
   const urlMatch = "gateway.keepgrow.com/cms/setting/processes";
@@ -31,7 +31,7 @@ const UpdateScript = () => {
 
   return (
     <>
-      {page === steps.match && <UpdateScriptPage />}
+      {page === steps.match && <UpdateScriptPage hosting={hosting} />}
       {page === steps.nm && <NotMatchingPage step={3} />}
       <PathStepFooter steps={steps} step={page} setPage={setPage} />
     </>

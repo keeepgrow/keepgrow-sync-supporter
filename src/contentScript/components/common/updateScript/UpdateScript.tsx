@@ -1,14 +1,24 @@
 import { Checkbox, message } from "antd";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import useInput from "../../../../../../popup/utils/hooks/useInput";
+import useInput from "../../../../popup/utils/hooks/useInput";
 import TextArea from "antd/es/input/TextArea";
-import { usePatchData } from "../../../../../../popup/store/patchData";
+import { usePatchData } from "../../../../popup/store/patchData";
 import { useNavigate } from "react-router-dom";
-import { scriptContent } from "../../../../../utils/patch/script";
-import Button from "../../../../../components/Button";
+import { scriptContent } from "../../../utils/patch/script";
+import Button from "../../Button";
 
-const UpdateScriptPage = () => {
+const HOSTING_INFO = {
+  CAFE24: {
+    URL: "https://eclogin.cafe24.com/Shop/",
+    JS_URL: "https://gateway.keepgrow.com/cms/setting/processes/integratedScript"
+  },
+  IMWEB: {
+    URL: "https://imweb.me/login",
+    JS_URL: "https://gateway.keepgrow.com/cms/setting/processes/integratedScript"
+  }
+};
+const UpdateScriptPage = ({ hosting }: { hosting: "CAFE24" | "IMWEB" }) => {
   const [src, setSrc] = useState<string | null>(null);
   const navigate = useNavigate();
   const { value: dataEnvMobile, onChange } = useInput(false);
@@ -16,7 +26,7 @@ const UpdateScriptPage = () => {
     value: textAreaValue,
     setValue: setTextAreaValue,
     onChange: onChangeTextValue
-  } = useInput(scriptContent["CAFE24"](src, dataEnvMobile));
+  } = useInput(scriptContent[hosting](src, dataEnvMobile));
 
   const getUrl = async () => {
     const getElement = async (retryCount = 2) => {
@@ -38,7 +48,7 @@ const UpdateScriptPage = () => {
   }, []);
 
   useEffect(() => {
-    setTextAreaValue(scriptContent["CAFE24"](src, dataEnvMobile));
+    setTextAreaValue(scriptContent[hosting](src, dataEnvMobile));
   }, [src, dataEnvMobile]);
 
   const onClick = () => {
@@ -47,7 +57,7 @@ const UpdateScriptPage = () => {
 
     setTimeout(() => {
       usePatchData.updateStep(5, navigate);
-      window.location.href = "https://eclogin.cafe24.com/Shop/";
+      window.location.href = HOSTING_INFO[hosting].URL;
     }, 1000);
   };
 
@@ -58,9 +68,11 @@ const UpdateScriptPage = () => {
       {src ? (
         <>
           <div className="mt-3">
-            <div className="input_checkbox_label">
-              data-env <Checkbox checked={dataEnvMobile} onChange={onChange} />
-            </div>
+            {hosting === "CAFE24" && (
+              <div className="input_checkbox_label">
+                data-env <Checkbox checked={dataEnvMobile} onChange={onChange} />
+              </div>
+            )}
             <div className="input_desc mt-2">
               시크릿모드 - PC, 모바일 - 회원가입 페이지 agreement.html 경우에만 해당 - 사용 여부 확인
             </div>

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import PatchStepHeader from "../../../components/patch/StepHeader";
 import UpdateMetaJson from "../../../components/common/updateMetaJson/route";
-import UpdateScript from "./step/updateScript/route";
+import UpdateScript from "../../../components/common/updateScript/route";
 import InjectScript from "./step/injectScript/route";
 import CheckHosting from "./step/checkHosting/route";
 import PatchNote from "../../../components/patch/Note";
@@ -29,7 +29,7 @@ const PatchCafe24Page = () => {
       {step === 1 && <CheckHosting />}
       {step === 2 && <UpdateMetaJson hosting="CAFE24" />}
       {step === 3 && <BuildScript hosting="CAFE24" />}
-      {step === 4 && <UpdateScript />}
+      {step === 4 && <UpdateScript hosting="CAFE24" />}
       {step === 5 && <InjectScript />}
     </Wrapper>
   );

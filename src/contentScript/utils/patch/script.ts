@@ -73,8 +73,8 @@ export const mappingPageScript = {
 };
 
 export const scriptContent = {
-  CAFE24: (src, dataEnv = false) =>
-    `<!-- KeepGrow 1초 회원가입 Script --> 
+  CAFE24: (src, dataEnv = false) => {
+    return `<!-- KeepGrow 1초 회원가입 Script --> 
 <!--  
 ======================================================================================================================= 
   <KeepGrow 1초 회원가입 Script에 대한 안내사항> 
@@ -85,5 +85,22 @@ export const scriptContent = {
 -->
 <div module="member_login" style="display:none !important"></div>
 <script id="kg-service-init" data-hosting="cafe24" src="${src}" ${dataEnv ? 'data-env="mobile"' : ""}></script>
-<!-- KeepGrow 1초 회원가입 Script -->`
+<!-- KeepGrow 1초 회원가입 Script -->`;
+  },
+
+  IMWEB: (src) => {
+    return `<!-- KeepGrow 1초 회원가입 Script -->
+<!--
+=======================================================================================================================
+  <KeepGrow 1초 회원가입 Script에 대한 안내사항>
+  - 본 스크립트는 저작권이 있는 자산으로, 다른 멀티 쇼핑몰(국내몰 및 외국어몰)에 무단 복제, 배포 등의 행위를 할 시 관련 법에 따라 제재를 받을 수 있습니다.
+  - 해당 스크립트 변조로 인해 발생된 모든 오류 및 장애에 대해 당사는 책임지지 않으며, 서비스 이용에 차질이 생길 수 있습니다.
+  - 이용 관련 문의 및 수정요청은 고객센터 https://pf.kakao.com/_fVBgT/chat로 문의 부탁드립니다.
+========================================================================================================================
+-->
+<style>body.login.page_ready header, body.login.page_ready main, body.login.page_ready footer,
+body.site_join_type_choice.page_ready header, body.site_join_type_choice.page_ready main, body.site_join_type_choice.page_ready footer{ opacity: 0; }</style>
+<script async id="kg-service-init" data-hosting="imweb" src="${src}"></script>
+<!-- KeepGrow 1초 회원가입 Script -->`;
+  }
 };

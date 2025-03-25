@@ -7,6 +7,7 @@ import PatchNote from "../../../components/patch/Note";
 import CheckHostingPage from "../imweb/step/checkHosting/route";
 import UpdateMetaJson from "../../../components/common/updateMetaJson/route";
 import BuildScript from "../../../components/common/buildScript/route";
+import UpdateScript from "../../../components/common/updateScript/route";
 
 const PatchImwebPage = () => {
   const params = useParams();
@@ -29,7 +30,7 @@ const PatchImwebPage = () => {
       {step === 1 && <CheckHostingPage />}
       {step === 2 && <UpdateMetaJson hosting="IMWEB" />}
       {step === 3 && <BuildScript hosting="IMWEB" />}
-      {/* {step === 4 && <UpdateScript />} */}
+      {step === 4 && <UpdateScript hosting="IMWEB" />}
       {/* {step === 5 && <InjectScript />} */}
     </Wrapper>
   );
