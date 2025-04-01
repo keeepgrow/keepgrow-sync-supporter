@@ -41,6 +41,7 @@ const Wrapper = styled.button`
   &:hover {
     opacity: 0.8;
   }
+  text-align: center;
 `;
 
 export default Button;

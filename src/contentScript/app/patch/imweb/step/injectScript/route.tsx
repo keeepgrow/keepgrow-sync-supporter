@@ -1,37 +1,35 @@
 import React, { useEffect, useState } from "react";
-import NotMatchingPage from "../../../../../components/patch/NotMatchingPage";
 
 import PathStepFooter from "../../../../../components/patch/StepFooter";
-import CheckHostingPage from "../../../../../components/common/CheckHosting";
-import ImwebLoginPage from "./ImwebLogin";
-import ImwebMysitePage from "./Mysite";
-import ImwebLogin2Page from "./ImwebLogin2";
+import NotMatchingPage4 from "./NotMatchingPage";
+import ImwebLoginPage from "../checkHosting/ImwebLogin";
+import ImwebLogin2Page from "../checkHosting/ImwebLogin2";
+import ImwebMysitePage from "../checkHosting/Mysite";
+import ImwebMainPage from "./MainPage";
 import ImwebHomePage from "./HomePage";
-import { Button } from "antd";
-import ImwebMainPage from "../injectScript/MainPage";
+import ImwebSettingPage from "./SettingPage";
 
-const MoveHosting = () => {
+const InjectScript = () => {
   const location = window.location.href;
-
-  const urlMatch = ["gateway.keepgrow.com/cms/setting/processes", "modify"];
 
   enum steps {
     login,
     login2,
+    mysite,
     main,
     home,
-    mysite,
-    cmsModify,
+    setting,
     nm
   }
-
   const [page, setPage] = useState(steps.nm);
 
   const urlCheck = () => {
+    // login
     if (location.includes("imweb.me/login")) {
       setPage(steps.login);
       return;
     }
+
     if (location.includes("imweb.me/mysite")) {
       setPage(steps.mysite);
       return;
@@ -45,13 +43,14 @@ const MoveHosting = () => {
       setPage(steps.home);
       return;
     }
-    if (location.includes("imweb.me")) {
-      setPage(steps.main);
+
+    if (location.includes("/admin/config/seo")) {
+      setPage(steps.setting);
       return;
     }
 
-    if (urlMatch.every((url) => location.includes(url))) {
-      setPage(steps.cmsModify);
+    if (location.includes("imweb.me")) {
+      setPage(steps.main);
       return;
     }
 
@@ -62,21 +61,17 @@ const MoveHosting = () => {
 
   return (
     <>
-      {page === steps.cmsModify && <CheckHostingPage hosting="IMWEB" />}
       {page === steps.login && <ImwebLoginPage />}
+      {page === steps.mysite && <ImwebMysitePage />}
       {page === steps.login2 && <ImwebLogin2Page />}
       {page === steps.main && <ImwebMainPage />}
       {page === steps.home && <ImwebHomePage />}
-      {page === steps.mysite && <ImwebMysitePage />}
-      {page === steps.nm && <NotMatchingPage />}
-      <div className="mt-2">
-        <Button onClick={() => setPage(steps.nm)} type="dashed">
-          CMS 입력 페이지
-        </Button>
-      </div>
+      {page === steps.setting && <ImwebSettingPage />}
+
+      {page === steps.nm && <NotMatchingPage4 />}
       <PathStepFooter steps={steps} step={page} setPage={setPage} />
     </>
   );
 };
 
-export default MoveHosting;
+export default InjectScript;

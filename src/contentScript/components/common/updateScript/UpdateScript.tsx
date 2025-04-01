@@ -64,24 +64,32 @@ const UpdateScriptPage = ({ hosting }: { hosting: "CAFE24" | "IMWEB" }) => {
   return (
     <Wrapper className="kg_con">
       <div className="kg_title">통합스크립트 내용 수정</div>
-      <div className="kg_sub">반응형 확인과 스크립트 수정을 진행합니다.</div>
+      <div className="kg_sub">반응형 확인(cafe24)과 스크립트 수정을 진행합니다.</div>
       {src ? (
         <>
           <div className="mt-3">
             {hosting === "CAFE24" && (
-              <div className="input_checkbox_label">
-                data-env <Checkbox checked={dataEnvMobile} onChange={onChange} />
-              </div>
+              <>
+                <div className="input_checkbox_label">
+                  data-env <Checkbox checked={dataEnvMobile} onChange={onChange} />
+                </div>
+                <div className="input_desc mt-2">
+                  시크릿모드 - PC, 모바일 - 회원가입 페이지 agreement.html 경우에만 해당 - 사용 여부 확인
+                </div>
+                <div className="input_desc">data-env="mobile" 삽입</div>
+              </>
             )}
-            <div className="input_desc mt-2">
-              시크릿모드 - PC, 모바일 - 회원가입 페이지 agreement.html 경우에만 해당 - 사용 여부 확인
-            </div>
-            <div className="input_desc">data-env="mobile" 삽입</div>
           </div>
 
           <div className="mt-4">
-            <div className="input_label">통합 JS - CAFE24</div>
-            <TextArea autoSize={{ minRows: 10 }} size="small" onChange={onChangeTextValue} value={textAreaValue} />
+            <div className="input_label">통합 JS - {hosting}</div>
+            <TextArea
+              className="mt-2"
+              autoSize={{ minRows: 10 }}
+              size="small"
+              onChange={onChangeTextValue}
+              value={textAreaValue}
+            />
           </div>
 
           <Button className="mt-4" onClick={onClick}>
@@ -90,7 +98,7 @@ const UpdateScriptPage = ({ hosting }: { hosting: "CAFE24" | "IMWEB" }) => {
         </>
       ) : (
         <div className="mt-4">
-          <div className="input_label">통합 JS - CAFE24</div>
+          <div className="input_label">통합 JS - {hosting}</div>
           <div className="input_desc">통합 JS 주소가 없습니다.</div>
         </div>
       )}

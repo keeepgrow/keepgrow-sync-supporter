@@ -39,25 +39,7 @@ const ImwebLogin2Page = () => {
     loginButton?.click();
   };
 
-  const onClickInfo = (type: "id" | "pw") => {
-    // 아이디 복사
-    if (type === "id") {
-    } else {
-      message.info("비밀번호를 입력해주세요.");
-    }
-  };
   const navigate = useNavigate();
-
-  const onClickNext = async () => {
-    const patchData = await getPatchData();
-    if (!patchData) {
-      message.error("process 번호가 없습니다.");
-      return;
-    }
-    usePatchData.updateStep(2, navigate);
-
-    window.open(`https://gateway.keepgrow.com/cms/setting/processes/${patchData.processesNumber}`);
-  };
 
   return (
     <Wrapper>
@@ -69,12 +51,7 @@ const ImwebLogin2Page = () => {
           <div>PW : {userInfo?.password || "-"}</div>
         </div>
 
-        <Button onClick={onClick} color="secondary">
-          로그인
-        </Button>
-        <div className="mt-2">
-          <Button onClick={onClickNext}>다음</Button>
-        </div>
+        <Button onClick={onClick}>로그인</Button>
       </div>
     </Wrapper>
   );

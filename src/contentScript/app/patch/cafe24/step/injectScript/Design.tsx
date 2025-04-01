@@ -9,6 +9,7 @@ import Button from "../../../../../components/Button";
 
 const Cafe24DesignPage = () => {
   const location = window.location.href;
+  const { getPatchData } = usePatchData();
 
   const [env, setEnv] = useState<"pc" | "mobile">("pc");
   const [patchData, setPatchData] = useState<PatchData>();
@@ -33,8 +34,6 @@ const Cafe24DesignPage = () => {
       return;
     }
   }, []);
-
-  const { getPatchData } = usePatchData();
 
   const getData = async () => {
     const patchData = await getPatchData();
@@ -113,7 +112,7 @@ const Wrapper = styled.div`
       }
     }
   }
-  .script_title{
+  .script_title {
     font-size: 12px;
   }
 `;

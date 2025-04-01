@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { SidepanelService } from "../../../../../utils/sidepanel";
+import { message } from "antd";
 
 const ImwebMysitePage = () => {
   useEffect(() => {
+    message.info("MYSITE를 선택해주세요");
     SidepanelService.closePanel();
   }, []);
   return (
