@@ -21,11 +21,6 @@ const NotMatchingPage = ({ step }: { step? }) => {
       return;
     }
 
-    if (location.includes(`https://gateway.keepgrow.com/cms/setting/processes/${value}`)) {
-      window.location.href = `https://gateway.keepgrow.com/cms/setting/processes/${value}/modify`;
-      return;
-    }
-
     window.open(`https://gateway.keepgrow.com/cms/setting/processes/${value}/modify`);
   };
 

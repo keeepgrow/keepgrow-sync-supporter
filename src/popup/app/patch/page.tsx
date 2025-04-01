@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const PatchSelectPage = () => {
-  const hostings = ["cafe24", "imweb", "makeshop"];
+  const hostings = ["cafe24", "imweb"];
   return (
     <Wrapper>
       <div className="title">
