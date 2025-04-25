@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import UpdateMetaJsonPage from "./UpdateMetaJson";
 import NotMatchingPage from "../../patch/NotMatchingPage";
-import PathStepFooter from "../../patch/StepFooter";
 
 const UpdateMetaJson = ({ hosting }: { hosting: "CAFE24" | "IMWEB" }) => {
   const location = window.location.href;
@@ -23,8 +22,7 @@ const UpdateMetaJson = ({ hosting }: { hosting: "CAFE24" | "IMWEB" }) => {
   return (
     <>
       {page === steps.match && <UpdateMetaJsonPage hosting={hosting} />}
-      {page === steps.nm && <NotMatchingPage />}
-      <PathStepFooter steps={steps} step={page} setPage={setPage} />
+      {page === steps.nm && <NotMatchingPage />}s{" "}
     </>
   );
 };

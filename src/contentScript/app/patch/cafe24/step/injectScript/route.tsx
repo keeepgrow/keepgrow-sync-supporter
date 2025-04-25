@@ -4,7 +4,6 @@ import Cafe24MainPage from "./MainPage";
 import NotMatchingPage4 from "./NotMatchingPage";
 import Cafe24ManagePage from "./Manage";
 import Cafe24DesignPage from "./Design";
-import PathStepFooter from "../../../../../components/patch/StepFooter";
 
 const InjectScript = () => {
   const location = window.location.href;
@@ -50,7 +49,6 @@ const InjectScript = () => {
       {page === steps.cafe24Manage && <Cafe24ManagePage />}
       {page === steps.cafe24Design && <Cafe24DesignPage />}
       {page === steps.nm && <NotMatchingPage4 />}
-      <PathStepFooter steps={steps} step={page} setPage={setPage} />
     </>
   );
 };

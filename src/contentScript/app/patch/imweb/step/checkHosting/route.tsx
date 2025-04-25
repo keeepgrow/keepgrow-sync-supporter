@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NotMatchingPage from "../../../../../components/patch/NotMatchingPage";
 
-import PathStepFooter from "../../../../../components/patch/StepFooter";
 import CheckHostingPage from "../../../../../components/common/CheckHosting";
 import ImwebLoginPage from "./ImwebLogin";
 import ImwebMysitePage from "./Mysite";
@@ -74,7 +73,6 @@ const MoveHosting = () => {
           CMS 입력 페이지
         </Button>
       </div>
-      <PathStepFooter steps={steps} step={page} setPage={setPage} />
     </>
   );
 };

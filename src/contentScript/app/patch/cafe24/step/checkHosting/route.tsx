@@ -3,7 +3,6 @@ import NotMatchingPage from "../../../../../components/patch/NotMatchingPage";
 import CheckHostingPage from "../../../../../components/common/CheckHosting";
 import Cafe24LoginPage from "./Cafe24Login";
 import Cafe24Home from "./Cafe24Home";
-import PathStepFooter from "../../../../../components/patch/StepFooter";
 
 const MoveHosting = () => {
   const location = window.location.href;
@@ -45,7 +44,6 @@ const MoveHosting = () => {
       {page === steps.login && <Cafe24LoginPage />}
       {page === steps.cafe24 && <Cafe24Home />}
       {page === steps.nm && <NotMatchingPage />}
-      <PathStepFooter steps={steps} step={page} setPage={setPage} />
     </>
   );
 };

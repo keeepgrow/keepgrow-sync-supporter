@@ -1,28 +1,26 @@
 import { Button } from "antd";
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { AuthApi } from "../../../api/auth";
 import { useUserStore } from "../../store/user";
 
 const PopupMainPage = () => {
-  // const [user, setUser] = useState({
-  //   userName: "유니드컴즈_루가",
-  //   email: "luca.im@uneedcomms.com"
-  // });
-
   const navigate = useNavigate();
   const onLogout = () => {
     AuthApi.logout();
     navigate("/login");
   };
 
-  // zustand
   const { user, fetchUser } = useUserStore();
 
   useEffect(() => {
-    fetchUser(); // 마운트될 때 유저 정보 가져오기
+    fetchUser();
   }, []);
+
+  const onPatch = () => {
+    navigate("/patch");
+  };
 
   return (
     <Wrapper>
@@ -37,8 +35,8 @@ const PopupMainPage = () => {
       </div>
 
       <div className="flex_box mt-3">
-        <Button size="large" type="primary" block color="default">
-          <Link to="/patch">패치 시작하기</Link>
+        <Button onClick={onPatch} size="large" type="primary" block color="default">
+          패치 시작하기
         </Button>
         <Button size="large" block disabled>
           검수 시작하기

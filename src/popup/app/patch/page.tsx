@@ -1,10 +1,14 @@
 import { Button } from "antd";
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const PatchSelectPage = () => {
   const hostings = ["cafe24", "imweb"];
+  const navigate = useNavigate();
+  const onPatch = (hosting: string) => {
+    navigate(`/patch/${hosting}`);
+  };
   return (
     <Wrapper>
       <div className="title">
@@ -12,8 +16,8 @@ const PatchSelectPage = () => {
       </div>
       <div className="flex_box mt-3">
         {hostings.map((hosting) => (
-          <Button key={hosting} size="large" type="primary" color="default" block>
-            <Link to={`${hosting}`}>{hosting.toUpperCase()} </Link>
+          <Button key={hosting} size="large" type="primary" color="default" block onClick={() => onPatch(hosting)}>
+            {hosting.toUpperCase()}
           </Button>
         ))}
       </div>

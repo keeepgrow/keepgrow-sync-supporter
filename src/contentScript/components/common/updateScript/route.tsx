@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 
 import NotMatchingPage from "../../patch/NotMatchingPage";
 import UpdateScriptPage from "./UpdateScript";
-import PathStepFooter from "../../patch/StepFooter";
 
 const UpdateScript = ({ hosting }: { hosting: "CAFE24" | "IMWEB" }) => {
   const location = window.location.href;
@@ -33,7 +32,6 @@ const UpdateScript = ({ hosting }: { hosting: "CAFE24" | "IMWEB" }) => {
     <>
       {page === steps.match && <UpdateScriptPage hosting={hosting} />}
       {page === steps.nm && <NotMatchingPage step={3} />}
-      <PathStepFooter steps={steps} step={page} setPage={setPage} />
     </>
   );
 };

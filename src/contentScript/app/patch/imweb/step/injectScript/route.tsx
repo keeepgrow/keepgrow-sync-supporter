@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import PathStepFooter from "../../../../../components/patch/StepFooter";
 import NotMatchingPage4 from "./NotMatchingPage";
 import ImwebLoginPage from "../checkHosting/ImwebLogin";
 import ImwebLogin2Page from "../checkHosting/ImwebLogin2";
@@ -69,7 +68,6 @@ const InjectScript = () => {
       {page === steps.setting && <ImwebSettingPage />}
 
       {page === steps.nm && <NotMatchingPage4 />}
-      <PathStepFooter steps={steps} step={page} setPage={setPage} />
     </>
   );
 };
