@@ -8,14 +8,14 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button = (props: Props) => {
   const { color = "main" } = props;
-  console.log(color);
-  const mapColor = {
+  const mapStyle = {
     main: {
       backgroundColor: "#333",
       color: "#fff"
     },
     secondary: {
       backgroundColor: "#fff",
+      border: "1px solid #e6e6e6",
       color: "#333"
     },
     warning: {
@@ -24,13 +24,7 @@ const Button = (props: Props) => {
     }
   };
   return (
-    <Wrapper
-      {...props}
-      style={{
-        backgroundColor: mapColor[color].backgroundColor,
-        color: mapColor[color].color
-      }}
-    >
+    <Wrapper {...props} style={mapStyle[color]}>
       {props.children}
     </Wrapper>
   );

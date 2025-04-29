@@ -59,7 +59,7 @@ const Cafe24Home = () => {
             <RedoOutlined />
           </AntdButton>
         </div>
-        <Button className="mt-4" onClick={onClickFinish} color="secondary">
+        <Button className="mt-4" onClick={onClickFinish}>
           종료
         </Button>
       </div>
