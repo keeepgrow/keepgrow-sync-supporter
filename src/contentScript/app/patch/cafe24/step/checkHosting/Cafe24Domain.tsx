@@ -42,11 +42,15 @@ const Cafe24Domain = () => {
       // 특정 td 선택 (예: 첫 번째 td)
       const firstTd = tds[0] as HTMLTableCellElement;
       firstTd.style.backgroundColor = "#ffff73";
+
+      let domain = firstTd.textContent?.trim();
+      domain = domain.replace("대표 도메인 변경", "");
+
       if (firstTd) {
-        usePatchData.updateDomain(firstTd.textContent?.trim());
-        message.success(`도메인이 저장되었습니다 : ${firstTd.textContent?.trim()}`);
+        usePatchData.updateDomain(domain);
+        message.success(`도메인이 저장되었습니다 : ${domain}`);
         getPatchData();
-        await Note.add(`domain : ${firstTd.textContent?.trim()}`);
+        await Note.add(`domain : ${domain}`);
         setTimeout(() => {
           window.close();
         }, 2000);
