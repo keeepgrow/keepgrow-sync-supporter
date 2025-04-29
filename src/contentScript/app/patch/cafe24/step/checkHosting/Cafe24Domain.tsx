@@ -23,7 +23,7 @@ const Cafe24Domain = () => {
       const rows = tbody.getElementsByTagName("tr");
       for (const row of rows) {
         const text = row.textContent || "";
-        if (text.includes("기본제공 도메인")) {
+        if (text.includes("상점대표 도메인")) {
           return row;
         }
       }
