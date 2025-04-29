@@ -1,6 +1,6 @@
 # Keepgrow Sync Supporter
 
-운영팀 패치 지원과 QA를 위한 패치 도구
+운영팀 패치 지원과 QA를 위한 패치 도구2
 
 ## 주요 기능
 
