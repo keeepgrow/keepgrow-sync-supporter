@@ -11,7 +11,7 @@ export class PatchData {
   userInfo?: { id: string; password: string };
   script?: string;
   domain?: string;
-
+  jsKey?: string;
   constructor(patchData?: PatchData) {
     if (!patchData) {
       return;
@@ -22,6 +22,7 @@ export class PatchData {
     this.userInfo = patchData?.userInfo;
     this.script = patchData?.script;
     this.domain = patchData?.domain;
+    this.jsKey = patchData?.jsKey;
   }
 }
 
@@ -83,6 +84,16 @@ usePatchData.updateDomain = async (domain) => {
   if (!data) return false;
 
   data.domain = domain;
+  const patchData = JSON.stringify(data);
+  await Storage.SET(STORAGE_PATCH_KEY, patchData);
+  return patchData;
+};
+
+usePatchData.updateJsKey = async (jsKey) => {
+  const data = await getPatchData();
+  if (!data) return false;
+
+  data.jsKey = jsKey;
   const patchData = JSON.stringify(data);
   await Storage.SET(STORAGE_PATCH_KEY, patchData);
   return patchData;

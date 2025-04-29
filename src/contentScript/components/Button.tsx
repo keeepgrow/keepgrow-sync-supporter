@@ -31,6 +31,14 @@ const Wrapper = styled.button`
       background-color: ${theme.color.light};
     }
   }
+  &.kg_blue {
+    background-color: ${theme.color.blue};
+    color: #fff;
+  }
+  &.kg_red {
+    background-color: #fe4f4f;
+    color: #fff;
+  }
 
   border: none;
   border-radius: 5px;

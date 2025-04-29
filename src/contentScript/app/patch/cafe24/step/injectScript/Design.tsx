@@ -4,7 +4,6 @@ import UrlCheckList from "../../../../../components/patch/UrlCheckList";
 import { PatchData, usePatchData } from "../../../../../../popup/store/patchData";
 import { mappingPageScript } from "../../../../../utils/patch/script";
 import { Button as AButton, message } from "antd";
-import BottomLayout from "../../../../../components/layout/bottom";
 import Button from "../../../../../components/Button";
 
 const Cafe24DesignPage = () => {

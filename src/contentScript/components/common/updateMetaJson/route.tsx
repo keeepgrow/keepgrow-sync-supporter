@@ -22,7 +22,7 @@ const UpdateMetaJson = ({ hosting }: { hosting: "CAFE24" | "IMWEB" }) => {
   return (
     <>
       {page === steps.match && <UpdateMetaJsonPage hosting={hosting} />}
-      {page === steps.nm && <NotMatchingPage />}s{" "}
+      {page === steps.nm && <NotMatchingPage />}
     </>
   );
 };

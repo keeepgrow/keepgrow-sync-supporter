@@ -24,12 +24,13 @@ const Wrapper = styled.div`
   top: 5px;
   left: 10px;
   .note_title {
+    cursor: pointer;
     font-size: 12px;
     font-weight: bold;
     margin-bottom: 20px;
-    color: #333;
+    color: #333333;
     &:hover {
-      color: ${theme.color.main};
+      color: ${theme.color.blue};
     }
   }
 `;
