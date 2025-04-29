@@ -89,7 +89,7 @@ const Cafe24DesignPage = () => {
         <div className="mt-2">
           <UrlCheckList checkList={checkList} />
         </div>
-        <Button className="mt-4" onClick={onClick}>
+        <Button className="kg-save-btn mt-4" onClick={onClick}>
           모두 저장
         </Button>
       </div>
@@ -113,6 +113,11 @@ const Wrapper = styled.div`
   }
   .script_title {
     font-size: 12px;
+  }
+  .kg-save-btn {
+    background: none !important;
+    background-color: #333 !important;
+    color: #fff !important;
   }
 `;
 

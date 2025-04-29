@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { usePatchData } from "../../../../../../popup/store/patchData";
 import Button from "../../../../../components/Button";
 import { message } from "antd";
+import { Note } from "../../../../../../popup/store/note";
 
 const Cafe24Domain = () => {
   const { getPatchData, patchData } = usePatchData();
@@ -10,7 +11,7 @@ const Cafe24Domain = () => {
   useEffect(() => {
     getPatchData();
   }, []);
-  const onClick = () => {
+  const onClick = async () => {
     // 요소를 찾고 처리하는 함수
     const findDomainRow = () => {
       const tbody = document.querySelector("tbody");
@@ -45,6 +46,7 @@ const Cafe24Domain = () => {
         usePatchData.updateDomain(firstTd.textContent?.trim());
         message.success(`도메인이 저장되었습니다 : ${firstTd.textContent?.trim()}`);
         getPatchData();
+        await Note.add(`domain : ${firstTd.textContent?.trim()}`);
         setTimeout(() => {
           window.close();
         }, 2000);

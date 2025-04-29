@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { usePatchData } from "../../../../../../popup/store/patchData";
 import Button from "../../../../../components/Button";
 import { message } from "antd";
+import { Note } from "../../../../../../popup/store/note";
 
 const Cafe24JsKey = () => {
   const { getPatchData, patchData } = usePatchData();
@@ -10,7 +11,7 @@ const Cafe24JsKey = () => {
   useEffect(() => {
     getPatchData();
   }, []);
-  const onClick = () => {
+  const onClick = async () => {
     const findJsKeyElement = () => {
       const element = document.querySelector(".kakaosync_javascript_key");
       return element as HTMLInputElement;
@@ -25,6 +26,7 @@ const Cafe24JsKey = () => {
       setTimeout(() => {
         window.close();
       }, 2000);
+      await Note.add(`jsKey : ${element.textContent?.trim()}`);
     } else {
       message.error("jsKey를 찾을 수 없습니다.");
     }

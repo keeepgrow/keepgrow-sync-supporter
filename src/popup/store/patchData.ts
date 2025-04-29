@@ -57,6 +57,17 @@ export const usePatchData = () => {
     init();
   }, []);
 
+  const getPatchData = async () => {
+    try {
+      const data = await Storage.GET(STORAGE_PATCH_KEY);
+      const result = JSON.parse(data);
+      setPatchData(new PatchData(result));
+      return result;
+    } catch (e) {
+      return;
+    }
+  };
+
   return {
     getPatchData,
     patchData,
@@ -65,20 +76,22 @@ export const usePatchData = () => {
   };
 };
 
+export const getPatchData = async () => {
+  try {
+    const data = await Storage.GET(STORAGE_PATCH_KEY);
+    const result = JSON.parse(data);
+    return result;
+  } catch (e) {
+    return;
+  }
+};
+
 usePatchData.endPatch = () => {
   Storage.DELETE(STORAGE_PATCH_KEY);
   Note.delete();
   window.location.reload();
 };
 
-export const getPatchData = async () => {
-  try {
-    const data = await Storage.GET(STORAGE_PATCH_KEY);
-    return JSON.parse(data);
-  } catch (e) {
-    return;
-  }
-};
 usePatchData.updateDomain = async (domain) => {
   const data = await getPatchData();
   if (!data) return false;

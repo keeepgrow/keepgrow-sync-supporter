@@ -23,9 +23,11 @@ const UpdateMetaJsonPage = ({ hosting }: { hosting: "CAFE24" | "IMWEB" }) => {
   const saveMetaJsonButton = document.querySelector("#meta-json-patch") as HTMLButtonElement;
 
   const [isError, setIsError] = useState(false);
+  const { patchData, getPatchData } = usePatchData();
 
   useEffect(() => {
     if (!kgtextArea) return;
+    getPatchData();
 
     const formattedData = formattedJsonString(kgtextArea.value);
     if (formattedData) {
@@ -46,27 +48,58 @@ const UpdateMetaJsonPage = ({ hosting }: { hosting: "CAFE24" | "IMWEB" }) => {
     }));
   };
   const formattedJsonString = (rawData) => {
-    let jsonString = rawData
-      .replace(/^{|}$/g, "")
-      .split(", ")
-      .map((pair) => {
-        let [key, value] = pair.split("=");
-        key = `"${key.trim()}"`;
+    try {
+      // 중괄호 제거
+      const content = rawData.slice(1, -1);
+      const result = {};
+      let pos = 0;
 
-        if (!value) {
-          value = `""`;
-        } else if (!isNaN(value) && !value.includes(".")) {
+      while (pos < content.length) {
+        // 키와 값 분리
+        const keyStart = content.indexOf("=", pos);
+        if (keyStart === -1) break;
+
+        const key = content.slice(pos, keyStart).trim();
+        let valueStart = keyStart + 1;
+        let value;
+        let valueEnd;
+
+        // 객체 형식인지 확인 (중첩된 객체 처리)
+        if (content[valueStart] === "{") {
+          let bracketCount = 1;
+          valueEnd = valueStart + 1;
+
+          while (bracketCount > 0 && valueEnd < content.length) {
+            if (content[valueEnd] === "{") bracketCount++;
+            if (content[valueEnd] === "}") bracketCount--;
+            valueEnd++;
+          }
+
+          // 객체를 문자열로 처리
+          value = content.slice(valueStart, valueEnd).trim();
         } else {
-          value = `"${value.trim()}"`;
+          // 일반 값 처리
+          valueEnd = content.indexOf(",", valueStart);
+          if (valueEnd === -1) valueEnd = content.length;
+
+          value = content.slice(valueStart, valueEnd).trim();
+
+          // 빈 값 처리
+          if (value === "") {
+            value = "";
+          }
+          // boolean 값 처리
+          else if (value === "true") value = true;
+          else if (value === "false") value = false;
+          // 숫자 값 처리 (빈 값이 아닐 때만)
+          else if (!isNaN(value) && !value.includes(".") && value !== "") value = Number(value);
         }
 
-        return `${key}: ${value}`;
-      })
-      .join(", ");
-    jsonString = `{ ${jsonString} }`;
+        result[key] = value;
+        pos = valueEnd + 1;
+      }
 
-    try {
-      return JSON.parse(jsonString);
+      return result;
     } catch (error) {
       console.error("❌ JSON 변환 오류:", error);
       setIsError(true);
@@ -75,12 +108,26 @@ const UpdateMetaJsonPage = ({ hosting }: { hosting: "CAFE24" | "IMWEB" }) => {
   };
 
   const convertToRawFormat = (data) => {
-    return JSON.stringify(data) // JSON을 문자열로 변환
-      .replace(/"https?:\/\/[^"]+"/g, (match) => match.replace(/:/g, "%COLON%")) // URL 보호
-      .replace(/:/g, "=") // 일반 콜론을 '='로 변경
-      .replace(/,/g, ", ") // 콤마를 ', '으로 변경
-      .replace(/"/g, "") // 큰따옴표 제거
-      .replace(/%COLON%/g, ":"); // URL의 원래 콜론 복원
+    const entries = Object.entries(data);
+    const formattedEntries = entries.map(([key, value]) => {
+      let formattedValue = value;
+
+      if (typeof value === "object" && value !== null) {
+        console.log("🔍 객체 형식:", key, value);
+        // 객체를 문자열로 변환할 때 JSON.stringify 사용
+        formattedValue = JSON.stringify(value);
+      } else if (typeof value === "boolean") {
+        formattedValue = value.toString();
+      } else if (typeof value === "number") {
+        formattedValue = value.toString();
+      } else {
+        formattedValue = value;
+      }
+
+      return `${key}=${formattedValue}`;
+    });
+
+    return `{${formattedEntries.join(", ")}}`;
   };
 
   // 호스팅별 필수값
@@ -113,6 +160,30 @@ const UpdateMetaJsonPage = ({ hosting }: { hosting: "CAFE24" | "IMWEB" }) => {
   if (isError) {
     return <Alert message="JSON 형식이 잘못되었습니다." type="error" />;
   }
+  const isCheckbox = (key) => {
+    const checkList = [
+      "KGJS_uiHide",
+      "KGJS_responsive",
+      "KGJS_smartLogin",
+      "KGJS_bannerImg_use",
+      "KGJS_bannerImg_join_use",
+      "KGJS_businessAuthority"
+    ];
+    return checkList.includes(key);
+  };
+  const CopyBlock = ({ children }: { children: string }) => {
+    return (
+      <div
+        className="copy_block"
+        onClick={() => {
+          message.success(`복사 : ${children}`);
+          navigator.clipboard.writeText(children);
+        }}
+      >
+        {children}
+      </div>
+    );
+  };
 
   return (
     <Wrapper className="kg_con">
@@ -122,20 +193,21 @@ const UpdateMetaJsonPage = ({ hosting }: { hosting: "CAFE24" | "IMWEB" }) => {
         {Object.keys(inputFields).map((key) => {
           return (
             <div key={key} className="metaJson_input_box">
-              <div className={getLabelClass(key)}>
-                {key.replace("KGJS_", "")}
-                {key === "KGJS_uiHide" && <span>← check ❌</span>}
-              </div>
-              {typeof inputFields[key] === "boolean" || inputFields[key] === "true" || inputFields[key] === "false" ? (
+              <div className={getLabelClass(key)}>{key.replace("KGJS_", "")}</div>
+              {key === "KGJS_domain" && <CopyBlock>{patchData?.domain}</CopyBlock>}
+              {key === "KGJS_accessKey" && <CopyBlock>{patchData?.jsKey}</CopyBlock>}
+              {isCheckbox(key) ? (
                 <Checkbox name={key} checked={checkCheckbox(inputFields[key])} onChange={handleChange} />
               ) : (
-                <Input
-                  name={key}
-                  placeholder={key.replace("KGJS_", "")}
-                  type="text"
-                  value={inputFields[key]}
-                  onChange={handleChange}
-                />
+                <React.Fragment key={key}>
+                  <Input
+                    name={key}
+                    placeholder={key.replace("KGJS_", "")}
+                    type="text"
+                    value={inputFields[key]}
+                    onChange={handleChange}
+                  />
+                </React.Fragment>
               )}
             </div>
           );
@@ -163,6 +235,8 @@ const Wrapper = styled.div`
     flex-direction: column;
     gap: 7px;
     .input_label {
+      display: flex;
+      gap: 5px;
       font-size: 14px;
       font-weight: 600;
       color: #333;
@@ -183,6 +257,12 @@ const Wrapper = styled.div`
   }
   .top {
     border-bottom: 1px solid #e8e8e8;
+  }
+  .copy_block {
+    font-size: 10px;
+    font-weight: 400;
+    color: #7a9eff;
+    cursor: pointer;
   }
 `;
 

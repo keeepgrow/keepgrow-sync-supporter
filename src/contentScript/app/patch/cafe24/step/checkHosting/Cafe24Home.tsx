@@ -4,16 +4,13 @@ import { usePatchData } from "../../../../../../popup/store/patchData";
 import { Button as AntdButton, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { RedoOutlined } from "@ant-design/icons"; // 화살표 아이콘 import
 
 const Cafe24Home = () => {
   const navigate = useNavigate();
   const { patchData, getPatchData } = usePatchData();
 
   const onClickDomain = () => {
-    // https://chan01.cafe24.com/disp/admin/shop1/main/dashboard
-    // https://chan01.cafe24.com/admin/php/shop1/m/company_info_f.php
-    // https://chan01.cafe24.com/disp/admin/shop1/Member/Oauth2ClientConfig
-
     const location = window.location.href;
     let newLocation = location.replace("disp/admin", "admin/php");
     newLocation = newLocation.replace("main/dashboard", "m/company_info_f.php");
@@ -35,8 +32,12 @@ const Cafe24Home = () => {
       return;
     }
     usePatchData.updateStep(2, navigate);
-
     window.open(`https://gateway.keepgrow.com/cms/setting/processes/${patchData.processesNumber}`);
+
+    window.location.href = "/admin/php/shop1/log_out.php";
+  };
+  const onClickRefresh = () => {
+    getPatchData();
   };
   return (
     <Wrapper>
@@ -54,6 +55,9 @@ const Cafe24Home = () => {
           <AntdButton variant="dashed" onClick={onClickJsKey}>
             jsKey 확인
           </AntdButton>
+          <AntdButton variant="filled" onClick={onClickRefresh}>
+            <RedoOutlined />
+          </AntdButton>
         </div>
         <Button className="mt-4" onClick={onClickFinish} color="secondary">
           종료
@@ -66,6 +70,8 @@ const Wrapper = styled.div`
   .info_box {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
     gap: 10px;
     margin-top: 30px;
     margin-bottom: 30px;
