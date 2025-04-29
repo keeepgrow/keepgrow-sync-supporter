@@ -3,13 +3,34 @@ import styled from "styled-components";
 import { theme } from "../style/theme";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  color?: "main" | "secondary";
+  color?: "main" | "secondary" | "warning";
 }
 
 const Button = (props: Props) => {
   const { color = "main" } = props;
+  console.log(color);
+  const mapColor = {
+    main: {
+      backgroundColor: "#333",
+      color: "#fff"
+    },
+    secondary: {
+      backgroundColor: "#fff",
+      color: "#333"
+    },
+    warning: {
+      backgroundColor: "#fe5656",
+      color: "#fff"
+    }
+  };
   return (
-    <Wrapper className={`kg_${color}`} {...props}>
+    <Wrapper
+      {...props}
+      style={{
+        backgroundColor: mapColor[color].backgroundColor,
+        color: mapColor[color].color
+      }}
+    >
       {props.children}
     </Wrapper>
   );
@@ -21,24 +42,6 @@ const Wrapper = styled.button`
 
   background-color: #333;
   color: #fff;
-  cursor: pointer;
-
-  &.kg_secondary {
-    background-color: ${theme.color.white};
-    color: #333;
-    border: 1px solid #b6b5b5;
-    &:hover {
-      background-color: ${theme.color.light};
-    }
-  }
-  &.kg_blue {
-    background-color: ${theme.color.blue};
-    color: #fff;
-  }
-  &.kg_red {
-    background-color: #fe4f4f;
-    color: #fff;
-  }
 
   border: none;
   border-radius: 5px;

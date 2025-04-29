@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Button as AButton, message } from "antd";
+import { message } from "antd";
 import { PatchData, usePatchData } from "../../../../../../popup/store/patchData";
 import Button from "../../../../../components/Button";
 
@@ -30,12 +30,9 @@ const ImwebSettingPage = () => {
       <div className="kg_con">
         <div className="kg_title">IMWEB 설정 페이지</div>
         <div className="kg_sub">통합스크립트를 Body Code에 주입하세요</div>
-        <div className="copy_box">
-          <AButton type="dashed" onClick={onClickScriptCopy}>
-            통합 스크립트 복사
-          </AButton>
-        </div>
-        <Button className="mt-4" onClick={onClickQuit}>
+
+        <Button onClick={onClickScriptCopy}>통합 스크립트 복사</Button>
+        <Button className="mt-4" color="warning" onClick={onClickQuit}>
           패치 종료
         </Button>
       </div>
