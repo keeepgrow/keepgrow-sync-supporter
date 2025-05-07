@@ -6,8 +6,9 @@ import PatchSelectPage from "./patch/page";
 import PatchPage from "./patch/[hosting]/page";
 import { usePatchData } from "../store/patchData";
 import { AuthApi } from "../../api/auth";
-import QAMainPage from "./qa/page";
-import QAPage from "./qa/[hosting]/page";
+import QAPopupMainPage from "./qa/page";
+import QAPopupPage from "./qa/[hosting]/page";
+import { getQAData } from "../store/qaData";
 
 const PopupRouter = () => {
   const navigate = useNavigate();
@@ -27,6 +28,11 @@ const PopupRouter = () => {
     if (patchData) {
       return navigate(`/patch/${patchData.hosting}`);
     }
+    
+    const qaData = await getQAData();
+    if (qaData) {
+      return navigate(`/qa/${qaData.hosting}`);
+    }
 
     return navigate("/main");
   };
@@ -36,8 +42,8 @@ const PopupRouter = () => {
       <Route path="/main" element={<PopupMainPage />} />
       <Route path="/patch" element={<PatchSelectPage />} />
       <Route path="/patch/:hosting" element={<PatchPage />} />
-      <Route path="/qa" element={<QAMainPage />} />
-      <Route path="/qa/:hosting" element={<QAPage />} />
+      <Route path="/qa" element={<QAPopupMainPage />} />
+      <Route path="/qa/:hosting" element={<QAPopupPage />} />
     </Routes>
   );
 };

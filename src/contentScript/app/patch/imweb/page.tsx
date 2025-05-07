@@ -21,13 +21,12 @@ const PatchImwebPage = () => {
     { step: 4, title: "통합스크립트 내용 수정" },
     { step: 5, title: "IMWEB 편집" }
   ];
-  console.log("PatchImwebPage", params);
 
   return (
     <Wrapper>
       <div className="sidepanel_title">IMWEB 패치</div>
       <PatchNote />
-      <PatchStepHeader steps={steps} step={step} />
+      <PatchStepHeader steps={steps} step={step} type="patch" />
       {step === 1 && <CheckHostingPage />}
       {step === 2 && <UpdateMetaJson hosting="IMWEB" />}
       {step === 3 && <BuildScript hosting="IMWEB" />}

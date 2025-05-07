@@ -2,17 +2,23 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { usePatchData } from "../../../popup/store/patchData";
+import { useQAData } from "../../../popup/store/qaData";
 import { theme } from "../../style/theme";
 
 interface Props {
   steps: { step: number; title: string }[];
   step: number;
+  type: "patch" | "qa";
 }
 
-const PatchStepHeader = ({ steps, step }: Props) => {
+const PatchStepHeader = ({ steps, step, type = "patch" }: Props) => {
   const navigate = useNavigate();
   const onClick = (step: number) => {
-    usePatchData.updateStep(step, navigate);
+    if (type === "patch") {
+      usePatchData.updateStep(step, navigate);
+    } else {
+      useQAData.updateStep(step, navigate);
+    }
   };
 
   return (
@@ -74,7 +80,7 @@ const Wrapper = styled.div`
     border-radius: 30px;
     cursor: pointer;
     &:hover {
-      background-color: #c6c6c6
+      background-color: #c6c6c6;
     }
   }
 

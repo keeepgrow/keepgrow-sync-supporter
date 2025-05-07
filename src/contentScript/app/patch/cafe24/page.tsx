@@ -25,7 +25,7 @@ const PatchCafe24Page = () => {
     <Wrapper>
       <div className="sidepanel_title">CAFE24 패치</div>
       <PatchNote />
-      <PatchStepHeader steps={steps} step={step} />
+      <PatchStepHeader steps={steps} step={step} type="patch" />
       {step === 1 && <CheckHosting />}
       {step === 2 && <UpdateMetaJson hosting="CAFE24" />}
       {step === 3 && <BuildScript hosting="CAFE24" />}

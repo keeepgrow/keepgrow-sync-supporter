@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useQAData } from "../../../store/qaData";
 
-const QAPage = () => {
+const QAPopupPage = () => {
   const params = useParams();
   const hosting = params.hosting;
 
@@ -31,4 +31,4 @@ const QAPage = () => {
 
 const Wrapper = styled.section``;
 
-export default QAPage;
+export default QAPopupPage;

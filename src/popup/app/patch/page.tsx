@@ -1,5 +1,5 @@
 import { Button } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { usePatchData } from "../../store/patchData";
@@ -8,11 +8,12 @@ const PatchSelectPage = () => {
   const hostings = ["cafe24", "imweb"];
   const navigate = useNavigate();
 
+  const [hosting, setHosting] = useState("cafe24");
+
   const { startPatch } = usePatchData();
 
-  const onPatch = (hosting: string) => {
+  const onPatch = () => {
     startPatch(hosting);
-
     navigate(`/patch/${hosting}`);
   };
   return (
@@ -20,17 +21,35 @@ const PatchSelectPage = () => {
       <div className="title">
         <div>패치할 호스팅사를 선택해주세요.</div>
       </div>
-      <div className="flex_box mt-3">
-        {hostings.map((hosting) => (
-          <Button key={hosting} size="large" type="primary" color="default" block onClick={() => onPatch(hosting)}>
-            {hosting.toUpperCase()}
+      <div className="flex_btn_box mt-3">
+        {hostings.map((_hosting) => (
+          <Button
+            key={_hosting}
+            type={_hosting === hosting ? "primary" : "default"}
+            onClick={() => setHosting(_hosting)}
+          >
+            {_hosting.toUpperCase()}
           </Button>
         ))}
+      </div>
+      <div className="mt-3">
+        <Button type="primary" color="cyan" onClick={onPatch} size="large" block>
+          시작
+        </Button>
       </div>
     </Wrapper>
   );
 };
 
-const Wrapper = styled.section``;
+const Wrapper = styled.section`
+  .flex_btn_box {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    button {
+      width: 100px;
+    }
+  }
+`;
 
 export default PatchSelectPage;

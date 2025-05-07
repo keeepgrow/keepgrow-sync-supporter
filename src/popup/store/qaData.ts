@@ -42,8 +42,8 @@ export const useQAData = () => {
     Storage.DELETE(STORAGE_QA_KEY);
     Chrome.reloadPage();
   };
-  const startQA = (hosting, domain) => {
-    Storage.SET(STORAGE_QA_KEY, JSON.stringify({ hosting, step: 1, domain }));
+  const startQA = (hosting) => {
+    Storage.SET(STORAGE_QA_KEY, JSON.stringify({ hosting, step: 1 }));
 
     Chrome.reloadPage();
   };
@@ -114,6 +114,6 @@ useQAData.updateStep = async (step, navigate?) => {
   data.step = step;
   Storage.SET(STORAGE_QA_KEY, JSON.stringify(data));
   if (navigate) {
-    navigate(`/patch/${data.hosting}/${step}`);
+    navigate(`/qa/${data.hosting}/${step}`);
   }
 };

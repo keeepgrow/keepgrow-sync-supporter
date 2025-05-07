@@ -4,18 +4,15 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useQAData } from "../../store/qaData";
 
-const QAMainPage = () => {
+const QAPopupMainPage = () => {
   const hostings = ["cafe24", "imweb"];
   const navigate = useNavigate();
 
   const { startQA } = useQAData();
   const [hosting, setHosting] = useState("cafe24");
-  const [domain, setDomain] = useState<string>("");
 
   const onStartQA = () => {
-    if (!domain) return;
-
-    startQA(hosting, domain);
+    startQA(hosting);
     navigate(`/qa/${hosting}`);
   };
 
@@ -36,10 +33,7 @@ const QAMainPage = () => {
         ))}
       </div>
       <div className="mt-3">
-        <Input placeholder="도메인을 입력해주세요." onChange={(e) => setDomain(e.target.value)} />
-      </div>
-      <div className="mt-3">
-        <Button type="primary" color="cyan" onClick={onStartQA} disabled={!domain || !hosting} size="large" block>
+        <Button type="primary" color="cyan" onClick={onStartQA} size="large" block>
           시작
         </Button>
       </div>
@@ -58,4 +52,4 @@ const Wrapper = styled.section`
   }
 `;
 
-export default QAMainPage;
+export default QAPopupMainPage;
