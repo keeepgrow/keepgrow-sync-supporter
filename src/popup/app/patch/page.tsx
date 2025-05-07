@@ -2,11 +2,17 @@ import { Button } from "antd";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { usePatchData } from "../../store/patchData";
 
 const PatchSelectPage = () => {
   const hostings = ["cafe24", "imweb"];
   const navigate = useNavigate();
+
+  const { startPatch } = usePatchData();
+
   const onPatch = (hosting: string) => {
+    startPatch(hosting);
+
     navigate(`/patch/${hosting}`);
   };
   return (

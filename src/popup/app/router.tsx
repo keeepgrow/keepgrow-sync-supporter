@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { Storage } from "../utils/ChromeApi";
-import { JwtUtil } from "../utils/JwtUtil";
-import PopupLoadingPage from "./loading/page";
 import PopupLoginPage from "./login/page";
 import PopupMainPage from "./main/page";
 import PatchSelectPage from "./patch/page";
 import PatchPage from "./patch/[hosting]/page";
 import { usePatchData } from "../store/patchData";
 import { AuthApi } from "../../api/auth";
+import QAMainPage from "./qa/page";
+import QAPage from "./qa/[hosting]/page";
 
 const PopupRouter = () => {
   const navigate = useNavigate();
@@ -33,11 +32,12 @@ const PopupRouter = () => {
   };
   return (
     <Routes>
-      <Route path="/" element={<PopupLoadingPage />} />
       <Route path="/login" element={<PopupLoginPage />} />
       <Route path="/main" element={<PopupMainPage />} />
       <Route path="/patch" element={<PatchSelectPage />} />
       <Route path="/patch/:hosting" element={<PatchPage />} />
+      <Route path="/qa" element={<QAMainPage />} />
+      <Route path="/qa/:hosting" element={<QAPage />} />
     </Routes>
   );
 };

@@ -22,6 +22,10 @@ const PopupMainPage = () => {
     navigate("/patch");
   };
 
+  const onQA = () => {
+    navigate("/qa");
+  };
+
   return (
     <Wrapper>
       <div className="user_info">
@@ -36,10 +40,10 @@ const PopupMainPage = () => {
 
       <div className="flex_box mt-3">
         <Button onClick={onPatch} size="large" type="primary" block color="default">
-          패치 시작하기
+          패치 시작
         </Button>
-        <Button size="large" block disabled>
-          검수 시작하기
+        <Button size="large" block color="cyan" onClick={onQA}>
+          QA 시작
         </Button>
       </div>
     </Wrapper>

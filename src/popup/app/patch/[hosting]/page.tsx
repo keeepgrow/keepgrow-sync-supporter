@@ -12,11 +12,11 @@ const PatchPage = () => {
 
   const { patchData, startPatch, endPatch } = usePatchData();
 
-  useEffect(() => {
-    if (!patchData) {
-      startPatch(hosting);
-    }
-  }, [patchData]);
+  // useEffect(() => {
+  // if (!patchData) {
+  //   startPatch(hosting);
+  // }
+  // }, [patchData]);
 
   const onSubmit = () => {
     endPatch();
