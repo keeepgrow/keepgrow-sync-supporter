@@ -21,16 +21,17 @@ const QAInDomain = () => {
 
     setTimeout(async () => {
       await useQAData.updateStep(2);
+      window.location.href = `https://${domain}/login`
     }, 1000);
   };
   return (
     <div>
       <div className="kg_con">
         <div className="kg_title">도메인 확인</div>
-        <div className="kg_sub">QA를 진행합니다.</div>
+        <div className="kg_sub">QA를 시작합니다.</div>
         <div>{qaData?.domain}</div>
         <Button className="mt-3" onClick={onClick}>
-          진행
+          시작
         </Button>
       </div>
     </div>

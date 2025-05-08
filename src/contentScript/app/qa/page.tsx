@@ -4,6 +4,7 @@ import styled from "styled-components";
 import PatchNote from "../../components/patch/Note";
 import PatchStepHeader from "../../components/patch/StepHeader";
 import QACheckDomain from "./step/checkDomain/page";
+import QALogin from "./step/checkLogin/page";
 
 const QAPage = () => {
   const params = useParams();
@@ -11,7 +12,7 @@ const QAPage = () => {
 
   const steps = [
     { step: 1, title: "도메인 저장" },
-    { step: 2, title: "metaJson 수정" },
+    { step: 2, title: "로그인 화면 확인" },
     { step: 3, title: "JS 파일 빌드" },
     { step: 4, title: "통합스크립트 내용 수정" },
     { step: 5, title: "IMWEB 편집" }
@@ -23,7 +24,7 @@ const QAPage = () => {
       <PatchNote />
       <PatchStepHeader steps={steps} step={step} type="qa" />
       {step === 1 && <QACheckDomain />}
-      {/* {step === 2 && <UpdateMetaJson hosting="IMWEB" />} */}
+      {step === 2 && <QALogin />}
       {/* {step === 3 && <BuildScript hosting="IMWEB" />} */}
       {/* {step === 4 && <UpdateScript hosting="IMWEB" />} */}
       {/* {step === 5 && <InjectScript />} */}
