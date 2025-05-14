@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getQAData, QAData } from "../../../../../popup/store/qaData";
 import QASaveDomain from "./SaveDomain";
 import QAInDomain from "./InDomain";
-const QACheckDomain = () => {
+const QACheckDomain = ({ hosting }: { hosting: string }) => {
   const location = window.location.href;
 
   enum steps {
@@ -37,7 +37,7 @@ const QACheckDomain = () => {
   return (
     <>
       {page === steps.domain && <QASaveDomain />}
-      {page === steps.inDomain && <QAInDomain />}
+      {page === steps.inDomain && <QAInDomain hosting={hosting} />}
     </>
   );
 };

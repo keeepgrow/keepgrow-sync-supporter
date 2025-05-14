@@ -5,13 +5,10 @@ import { useQAData } from "../../../../../popup/store/qaData";
 
 const QASaveDomain = () => {
   const [domain, setDomain] = useState("");
-  const { qaData, getQAData } = useQAData();
+  const { getQAData } = useQAData();
 
   const saveDomain = () => {
-    message.success(`도메인이 저장되었습니다.`);
-
     setTimeout(async () => {
-      await useQAData.updateDomain(domain);
       const formattedDomain = domain.startsWith("http") ? domain : `https://${domain}`;
       window.open(formattedDomain, "_blank");
     }, 1000);

@@ -5,14 +5,16 @@ import PatchNote from "../../components/patch/Note";
 import PatchStepHeader from "../../components/patch/StepHeader";
 import QACheckDomain from "./step/checkDomain/page";
 import QALogin from "./step/checkLogin/page";
+import QAOnLogin from "./step/onLogin/page";
 
 const QAPage = () => {
   const params = useParams();
   const step = Number(params.step);
+  const hosting = params.hosting;
 
   const steps = [
     { step: 1, title: "도메인 저장" },
-    { step: 2, title: "로그인 화면 확인" },
+    { step: 2, title: "로그인 & 회원가입 확인" },
     { step: 3, title: "JS 파일 빌드" },
     { step: 4, title: "통합스크립트 내용 수정" },
     { step: 5, title: "IMWEB 편집" }
@@ -23,9 +25,9 @@ const QAPage = () => {
       <div className="sidepanel_title">QA 진행중</div>
       <PatchNote />
       <PatchStepHeader steps={steps} step={step} type="qa" />
-      {step === 1 && <QACheckDomain />}
-      {step === 2 && <QALogin />}
-      {/* {step === 3 && <BuildScript hosting="IMWEB" />} */}
+      {step === 1 && <QACheckDomain hosting={hosting} />}
+      {step === 2 && <QALogin hosting={hosting} />}
+      {step === 3 && <QAOnLogin hosting={hosting} />}
       {/* {step === 4 && <UpdateScript hosting="IMWEB" />} */}
       {/* {step === 5 && <InjectScript />} */}
     </Wrapper>

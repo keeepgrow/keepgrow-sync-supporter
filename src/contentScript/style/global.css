@@ -49,7 +49,10 @@
 }
 .kg_con input {
   border-radius: 5px;
+  border: 1px solid #d9d9d9 !important;
+  padding: 8px !important;
 }
+
 .kg_title {
   font-size: 14px;
   font-weight: bold;
@@ -77,4 +80,14 @@
 }
 .mt-5 {
   margin-top: 20px;
+}
+
+.ml-1 {
+  margin-left: 4px;
+}
+.ml-2 {
+  margin-left: 8px;
+}
+.ml-3 {
+  margin-left: 12px;
 }

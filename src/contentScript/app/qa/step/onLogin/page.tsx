@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getQAData, QAData } from "../../../../../popup/store/qaData";
-import QALoginPage from "./LoginPage";
-import GoLogin from "./GoLogin";
-import QASignupPage from "./SignupPage";
-import QAKakaoLoginPage from "./KakaoLoginPage";
+import GoLogin from "../checkLogin/GoLogin";
 
-const QALogin = ({ hosting }: { hosting: string }) => {
+const QAOnLogin = ({ hosting }: { hosting: string }) => {
   const location = window.location.href;
 
   enum steps {
@@ -55,12 +52,12 @@ const QALogin = ({ hosting }: { hosting: string }) => {
 
   return (
     <>
-      {page === steps.login && <QALoginPage />}
-      {page === steps.signup && <QASignupPage />}
-      {page === steps.kakaoLogin && <QAKakaoLoginPage />}
+      {/* {page === steps.login && <QALoginPage />} */}
+      {/* {page === steps.signup && <QASignupPage />} */}
+      {/* {page === steps.kakaoLogin && <QAKakaoLoginPage />} */}
       {page === steps.noMatch && <GoLogin hosting={hosting} />}
     </>
   );
 };
 
-export default QALogin;
+export default QAOnLogin;

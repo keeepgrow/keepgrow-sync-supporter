@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Button from "../../../../components/Button";
 import { useQAData } from "../../../../../popup/store/qaData";
 
-const QAInDomain = ({ hosting }: { hosting: string }) => {
+const GoLogin = ({ hosting }: { hosting: string }) => {
   const [domain, setDomain] = useState("");
   const { qaData, getQAData } = useQAData();
 
@@ -17,7 +17,7 @@ const QAInDomain = ({ hosting }: { hosting: string }) => {
   };
 
   const onClick = () => {
-    message.success(`도메인이 저장되었습니다. QA를 진행합니다.`);
+    message.success(`로그인 페이지로 이동합니다.`);
 
     setTimeout(async () => {
       await useQAData.updateDomain(domain);
@@ -32,15 +32,15 @@ const QAInDomain = ({ hosting }: { hosting: string }) => {
   return (
     <div>
       <div className="kg_con">
-        <div className="kg_title">도메인 확인</div>
-        <div className="kg_sub">QA를 시작합니다.</div>
-        <Input placeholder="도메인을 입력해주세요." value={domain} onChange={(e) => setDomain(e.target.value)} />
+        <div className="kg_title">로그인 페이지 이동</div>
+        <div className="kg_sub">로그인 페이지로 이동합니다.</div>
+        <div className="kg_sub">{domain}</div>
         <Button className="mt-3" onClick={onClick}>
-          시작
+          이동
         </Button>
       </div>
     </div>
   );
 };
 
-export default QAInDomain;
+export default GoLogin;
