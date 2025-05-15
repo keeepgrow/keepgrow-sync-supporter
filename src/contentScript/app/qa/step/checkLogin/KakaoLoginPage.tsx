@@ -8,6 +8,16 @@ const QAKakaoLoginPage = () => {
   const [pw, setPw] = useState<string>("Keep01357!");
 
   const onClickKakaoLogin = () => {
+    const continueBtn = document.querySelector(".btn_agree") as HTMLButtonElement;
+    if (continueBtn) {
+      message.success("카카오 로그인 버튼 클릭");
+      setTimeout(async () => {
+        await useQAData.updateStep(3);
+        continueBtn.click();
+      }, 1000);
+      return;
+    }
+
     const inputs = document.querySelectorAll("input");
     const idInput = inputs[0] as HTMLInputElement;
     idInput.value = id;

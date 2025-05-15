@@ -17,6 +17,12 @@
   align-items: center;
   border: none;
 }
+/* mobile 환경에서 right -30px */
+@media (max-width: 768px) {
+  .kg-sidepanel {
+    right: 15px;
+  }
+}
 
 .kg-sidepanel-content {
   position: relative;

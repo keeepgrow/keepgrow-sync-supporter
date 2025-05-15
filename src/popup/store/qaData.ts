@@ -10,6 +10,11 @@ export class QAData {
   userInfo?: { id: string; password: string };
   domain?: string;
 
+  // 계류페이지
+  pendingPage?: boolean;
+  mappingLogin?: boolean;
+  smartLogin?: boolean;
+  
   constructor(qaData?: QAData) {
     if (!qaData) {
       return;
@@ -85,6 +90,16 @@ useQAData.endQA = () => {
   Storage.DELETE(STORAGE_QA_KEY);
   Note.delete();
   window.location.reload();
+};
+
+useQAData.update = async (type, value) => {
+  const data = await getQAData();
+  if (!data) return false;
+
+  data[type] = value;
+  const patchData = JSON.stringify(data);
+  await Storage.SET(STORAGE_QA_KEY, patchData);
+  return patchData;
 };
 
 useQAData.updateDomain = async (domain) => {

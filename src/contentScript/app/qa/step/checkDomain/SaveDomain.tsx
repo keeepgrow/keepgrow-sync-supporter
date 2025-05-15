@@ -7,7 +7,9 @@ const QASaveDomain = () => {
   const [domain, setDomain] = useState("");
   const { getQAData } = useQAData();
 
-  const saveDomain = () => {
+  const saveDomain = async () => {
+    await useQAData.update("domain", domain);
+
     setTimeout(async () => {
       const formattedDomain = domain.startsWith("http") ? domain : `https://${domain}`;
       window.open(formattedDomain, "_blank");

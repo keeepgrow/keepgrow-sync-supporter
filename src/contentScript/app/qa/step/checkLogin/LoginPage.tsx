@@ -58,9 +58,7 @@ const QALoginPage = () => {
   };
 
   const onClickSignup = () => {
-    const signupBtn = Array.from(document.querySelectorAll("a")).find(
-      (el) => el.textContent?.trim() === "회원가입"
-    ) as HTMLElement;
+    const signupBtn = document.querySelector("a.right") as HTMLElement;
     if (!signupBtn) {
       message.error("회원가입 버튼을 찾을 수 없습니다.");
       return;
@@ -147,9 +145,11 @@ const QALoginPage = () => {
           <AntdButton onClick={onClickFooter} type="dashed">
             Footer
           </AntdButton>
-          <AntdButton className="ml-3" onClick={onClickDelivery} type="dashed">
-            비회원 배송조회
-          </AntdButton>
+          {!isDeliveryPage && (
+            <AntdButton className="ml-3" onClick={onClickDelivery} type="dashed">
+              비회원 배송조회 이동
+            </AntdButton>
+          )}
         </div>
 
         <Button className="mt-3" onClick={onClickSignup}>

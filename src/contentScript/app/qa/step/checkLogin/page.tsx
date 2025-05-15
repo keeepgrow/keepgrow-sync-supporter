@@ -27,7 +27,7 @@ const QALogin = ({ hosting }: { hosting: string }) => {
 
   const loginPage = ["member/login.html", "/login"];
   const signupPage = ["/member/join.html", "/member/agreement.html", "/signup"];
-  const kakaoLoginPage = ["/accounts.kakao.com/login/"];
+  const kakaoLoginPage = ["/accounts.kakao.com/login/", "kauth.kakao.com/"];
   const urlCheck = () => {
     if (!qaData) return;
 

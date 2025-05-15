@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getQAData, QAData } from "../../../../../popup/store/qaData";
+import { useQAData } from "../../../../../popup/store/qaData";
 import QASaveDomain from "./SaveDomain";
 import QAInDomain from "./InDomain";
 const QACheckDomain = ({ hosting }: { hosting: string }) => {
@@ -10,17 +10,10 @@ const QACheckDomain = ({ hosting }: { hosting: string }) => {
     inDomain
   }
   const [page, setPage] = useState(steps.domain);
-  const [qaData, setQaData] = useState<QAData>();
-
-  const getData = async () => {
-    const qaData = await getQAData();
-    if (qaData) setQaData(qaData);
-  };
-  useEffect(() => {
-    getData();
-  }, []);
+  const { qaData } = useQAData();
 
   const urlCheck = () => {
+    console.log(qaData);
     if (!qaData) return;
 
     if (location.includes(qaData.domain)) {
