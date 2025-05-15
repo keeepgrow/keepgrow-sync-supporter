@@ -14,7 +14,7 @@ export class QAData {
   pendingPage?: boolean;
   mappingLogin?: boolean;
   smartLogin?: boolean;
-  
+
   constructor(qaData?: QAData) {
     if (!qaData) {
       return;
@@ -47,8 +47,8 @@ export const useQAData = () => {
     Storage.DELETE(STORAGE_QA_KEY);
     Chrome.reloadPage();
   };
-  const startQA = (hosting) => {
-    Storage.SET(STORAGE_QA_KEY, JSON.stringify({ hosting, step: 1 }));
+  const startQA = async (hosting, domain?) => {
+    await Storage.SET(STORAGE_QA_KEY, JSON.stringify({ hosting, step: 1, domain }));
 
     Chrome.reloadPage();
   };

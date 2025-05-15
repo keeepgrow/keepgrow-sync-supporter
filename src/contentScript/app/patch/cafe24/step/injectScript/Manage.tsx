@@ -5,6 +5,7 @@ import { usePatchData } from "../../../../../../popup/store/patchData";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../../../components/Button";
 import SquareButton from "../../../../../components/SquareButton";
+import { useQAData } from "../../../../../../popup/store/qaData";
 
 const Cafe24ManagePage = () => {
   const onClickButton = (num) => {
@@ -17,6 +18,8 @@ const Cafe24ManagePage = () => {
   };
 
   const navigate = useNavigate();
+  const { startQA } = useQAData();
+  const { patchData } = usePatchData();
 
   const onClickNewPatch = () => {
     usePatchData.updateStep(1, navigate);
@@ -25,6 +28,11 @@ const Cafe24ManagePage = () => {
   };
   const onClickEnd = () => {
     usePatchData.endPatch();
+  };
+  const onStartQA = async () => {
+    await usePatchData.endPatch();
+    startQA(patchData.hosting, patchData.domain);
+    navigate(`/qa/${patchData.hosting}`);
   };
 
   return (
@@ -45,10 +53,11 @@ const Cafe24ManagePage = () => {
           </Button>
         </div>
         <div className="kg_btn_box">
+          <SquareButton onClick={onStartQA}>QA 시작</SquareButton>
+          <SquareButton onClick={onClickNewPatch}>새 패치 시작</SquareButton>
           <SquareButton color="secondary" onClick={onClickEnd}>
             패치 종료
           </SquareButton>
-          <SquareButton onClick={onClickNewPatch}>새 패치 시작</SquareButton>
         </div>
       </div>
     </Wrapper>
