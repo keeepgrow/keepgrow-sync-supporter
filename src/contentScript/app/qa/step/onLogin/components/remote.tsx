@@ -1,9 +1,8 @@
 import { Button } from "antd";
 import React from "react";
 import styled from "styled-components";
-import { useQAData } from "../../../../../popup/store/qaData";
-const OnLoginFooter = () => {
-  const { qaData } = useQAData();
+
+const OnLoginRemote = () => {
   const onClickMain = () => {
     window.location.href = "/";
   };
@@ -20,22 +19,29 @@ const OnLoginFooter = () => {
     window.location.href = "/order/basket.html";
   };
 
+  const onClickMapping = () => {
+    window.location.href = "/member/mapping_login.html";
+  };
+
   return (
     <>
       <Wrapper>
         <h4>remote</h4>
         <div className="btn-wrapper">
           <Button onClick={onClickMain} type="default">
-            메인 페이지
+            main
           </Button>
           <Button onClick={onClickLoginPage} type="default">
-            로그인
+            login
           </Button>
           <Button onClick={onClickCart} type="default">
-            장바구니
+            basket
+          </Button>
+          <Button onClick={onClickMapping} type="default">
+            mapping
           </Button>
           <Button onClick={onClickLogout} type="default" danger>
-            로그아웃
+            logout
           </Button>
         </div>
       </Wrapper>
@@ -53,14 +59,13 @@ const Wrapper = styled.div`
   }
   .btn-wrapper {
     display: flex;
-    justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
     gap: 10px;
   }
   button {
-    width: 100px;
+    width: 80px;
   }
 `;
 
-export default OnLoginFooter;
+export default OnLoginRemote;

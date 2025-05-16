@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { getQAData, QAData } from "../../../../../popup/store/qaData";
+import { getQAData, QAData, useQAData } from "../../../../../popup/store/qaData";
 import MappingLoginPage from "./MappginLogin";
-import Onlogin from "./OnLogin";
+import LoginPage from "./LoginPage";
 import Cart from "./Cart";
-import LoginCheckbox from "./checkbox";
-import OnLoginFooter from "./footer";
+import LoginCheckbox from "./components/checkbox";
+import QAKakaoLoginPage from "./KakaoLoginPage";
 import NoMatch from "./NoMatch";
-import QAKakaoLoginPage from "../checkLogin/KakaoLoginPage";
+import QASignupPage from "./SignupPage";
+import OnLoginRemote from "./components/remote";
+import Button from "../../../../components/Button";
 
 const QAOnLogin = ({ hosting }: { hosting: string }) => {
   const location = window.location.href;
@@ -16,9 +18,10 @@ const QAOnLogin = ({ hosting }: { hosting: string }) => {
     login,
     cart,
     noMatch,
-    kakaoLogin
+    kakaoLogin,
+    signup
   }
-  const [page, setPage] = useState(steps.mappingLogin);
+  const [page, setPage] = useState(steps.noMatch);
   const [qaData, setQaData] = useState<QAData>();
 
   const getData = async () => {
@@ -33,6 +36,7 @@ const QAOnLogin = ({ hosting }: { hosting: string }) => {
   const loginPage = ["/member/login.html"];
   const cartPage = ["/order/basket.html"];
   const kakaoLoginPage = ["/accounts.kakao.com/login/", "kauth.kakao.com/"];
+  const signupPage = ["/member/join.html", "/member/agreement.html", "/signup"];
 
   const urlCheck = () => {
     if (!qaData) return;
@@ -42,25 +46,27 @@ const QAOnLogin = ({ hosting }: { hosting: string }) => {
       return;
     }
 
-    if (location.includes(qaData.domain)) {
-      if (mappingLoginPage.some((page) => location.includes(page))) {
-        setPage(steps.mappingLogin);
-        return;
-      }
-      if (loginPage.some((page) => location.includes(page))) {
-        setPage(steps.login);
-        return;
-      }
-      if (cartPage.some((page) => location.includes(page))) {
-        setPage(steps.cart);
-        return;
-      }
-      // if (signupPage.some((page) => location.includes(page))) {
-      //   setPage(steps.signup);
-      //   return;
-      // }
+    if (signupPage.some((page) => location.includes(page))) {
+      setPage(steps.signup);
+      return;
     }
 
+    if (mappingLoginPage.some((page) => location.includes(page))) {
+      setPage(steps.mappingLogin);
+      return;
+    }
+    if (loginPage.some((page) => location.includes(page))) {
+      setPage(steps.login);
+      return;
+    }
+    if (cartPage.some((page) => location.includes(page))) {
+      setPage(steps.cart);
+      return;
+    }
+    // if (signupPage.some((page) => location.includes(page))) {
+    //   setPage(steps.signup);
+    //   return;
+    // }
     setPage(steps.noMatch);
     return;
   };
@@ -71,13 +77,18 @@ const QAOnLogin = ({ hosting }: { hosting: string }) => {
     <>
       <div className="kg_con">
         {page === steps.mappingLogin && <MappingLoginPage />}
-        {page === steps.login && <Onlogin />}
+        {page === steps.login && <LoginPage />}
+        {page === steps.signup && <QASignupPage />}
+
         {page === steps.cart && <Cart />}
-        {page === steps.noMatch && <NoMatch />}
+        {page === steps.kakaoLogin && <QAKakaoLoginPage />}
+        {page === steps.noMatch && <NoMatch hosting={hosting} />}
+        <OnLoginRemote />
         <LoginCheckbox />
-        <OnLoginFooter />
       </div>
-      {page === steps.kakaoLogin && <QAKakaoLoginPage />}
+      <Button className="mt-3" onClick={() => useQAData.endQA()}>
+        QA 종료
+      </Button>
     </>
   );
 };

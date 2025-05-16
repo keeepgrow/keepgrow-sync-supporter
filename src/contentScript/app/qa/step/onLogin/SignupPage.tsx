@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button as AntdButton, message } from "antd";
 import Button from "../../../../components/Button";
+import { useQAData } from "../../../../../popup/store/qaData";
 
 const QASignupPage = () => {
   const [successFooter, setSuccessFooter] = useState<boolean>();
@@ -58,10 +59,8 @@ const QASignupPage = () => {
     signupButton.style.backgroundColor = "yellowgreen";
     setTimeout(() => {
       signupButton.click();
+      useQAData.update("defaultSignup", true);
     }, 1000);
-  };
-  const onClickReload = () => {
-    window.location.reload();
   };
 
   return (
@@ -76,15 +75,13 @@ const QASignupPage = () => {
             </div>
           )}
         </div>
+
         <div className="mt-3">
           <AntdButton onClick={onClickFooter} type="dashed">
             Footer 확인
           </AntdButton>
           <AntdButton className="ml-3" onClick={onClickSignup} type="dashed">
             일반 회원가입
-          </AntdButton>
-          <AntdButton className="ml-3" onClick={onClickReload} type="dashed">
-            ↪️
           </AntdButton>
         </div>
         <Button className="mt-3" onClick={onClickKakaoLogin}>

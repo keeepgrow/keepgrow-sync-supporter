@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Chrome, Storage } from "../utils/ChromeApi";
+import { Chrome, dispatchStatusChangeEvent, Storage } from "../utils/ChromeApi";
 import { Note } from "./note";
 
 export const STORAGE_QA_KEY = "kgQAData";
@@ -11,9 +11,12 @@ export class QAData {
   domain?: string;
 
   // 계류페이지
-  pendingPage?: boolean;
-  mappingLogin?: boolean;
-  smartLogin?: boolean;
+  pendingPage: boolean = false;
+  mappingLogin: boolean = false;
+  smartLogin: boolean = false;
+  loginFooter: boolean = false;
+  deliveryForm: boolean = false;
+  defaultSignup: boolean = false;
 
   constructor(qaData?: QAData) {
     if (!qaData) {
@@ -23,6 +26,13 @@ export class QAData {
     this.step = qaData?.step || 1;
     this.userInfo = qaData?.userInfo;
     this.domain = qaData?.domain;
+
+    this.pendingPage = qaData?.pendingPage;
+    this.mappingLogin = qaData?.mappingLogin;
+    this.smartLogin = qaData?.smartLogin;
+    this.loginFooter = qaData?.loginFooter;
+    this.deliveryForm = qaData?.deliveryForm;
+    this.defaultSignup = qaData?.defaultSignup;
   }
 }
 
@@ -99,6 +109,7 @@ useQAData.update = async (type, value) => {
   data[type] = value;
   const patchData = JSON.stringify(data);
   await Storage.SET(STORAGE_QA_KEY, patchData);
+  dispatchStatusChangeEvent(STORAGE_QA_KEY, value);
   return patchData;
 };
 

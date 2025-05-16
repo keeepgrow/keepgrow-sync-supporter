@@ -4,7 +4,6 @@ import styled from "styled-components";
 import PatchNote from "../../components/patch/Note";
 import PatchStepHeader from "../../components/patch/StepHeader";
 import QACheckDomain from "./step/checkDomain/page";
-import QALogin from "./step/checkLogin/page";
 import QAOnLogin from "./step/onLogin/page";
 
 const QAPage = () => {
@@ -14,8 +13,7 @@ const QAPage = () => {
 
   const steps = [
     { step: 1, title: "도메인 저장" },
-    { step: 2, title: "로그인 & 회원가입 확인" },
-    { step: 3, title: "QA 진행" }
+    { step: 2, title: "QA 진행" }
   ];
 
   return (
@@ -24,8 +22,7 @@ const QAPage = () => {
       <PatchNote />
       <PatchStepHeader steps={steps} step={step} type="qa" />
       {step === 1 && <QACheckDomain hosting={hosting} />}
-      {step === 2 && <QALogin hosting={hosting} />}
-      {step === 3 && <QAOnLogin hosting={hosting} />}
+      {step === 2 && <QAOnLogin hosting={hosting} />}
     </Wrapper>
   );
 };

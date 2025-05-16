@@ -37,21 +37,18 @@ const QAKakaoLoginPage = () => {
 
     message.success("카카오 로그인 버튼 클릭");
     setTimeout(async () => {
-      await useQAData.updateStep(3);
       loginBtn.click();
     }, 1000);
   };
 
   return (
     <div>
-      <div className="kg_con">
-        <div className="kg_title">카카오 로그인</div>
-        <Input placeholder="ID" value={id} onChange={(e) => setId(e.target.value)} />
-        <Input className="mt-3" placeholder="비밀번호" value={pw} onChange={(e) => setPw(e.target.value)} />
-        <Button className="mt-3" onClick={onClickKakaoLogin}>
-          카카오 로그인
-        </Button>
-      </div>
+      <div className="kg_title">카카오 로그인</div>
+      <Input placeholder="ID" value={id} onChange={(e) => setId(e.target.value)} />
+      <Input className="mt-3" placeholder="비밀번호" value={pw} onChange={(e) => setPw(e.target.value)} />
+      <Button className="mt-3" onClick={onClickKakaoLogin}>
+        카카오 로그인
+      </Button>
     </div>
   );
 };

@@ -1,11 +1,7 @@
 import React, { useEffect } from "react";
 import { useQAData } from "../../../../../popup/store/qaData";
-import LoginCheckbox from "./checkbox";
-import OnLoginFooter from "./footer";
 
 const MappingLoginPage = () => {
-  const { qaData } = useQAData();
-
   useEffect(() => {
     useQAData.update("mappingLogin", true);
   }, []);

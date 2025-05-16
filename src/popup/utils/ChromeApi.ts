@@ -1,15 +1,3 @@
-// const sendMessagePromiseToBackground = (message: Message) => {
-//   return new Promise((resolve, reject) => {
-//     chrome.runtime.sendMessage(message, (response) => {
-//       if (chrome.runtime.lastError) {
-//         reject(chrome.runtime.lastError);
-//       } else {
-//         resolve(response);
-//       }
-//     });
-//   });
-// };
-
 const saveLocalStorage = (key: string, value: any): Promise<void> => {
   const obj = {};
   obj[key] = value;
@@ -63,6 +51,23 @@ export const Storage = {
     Storage.DELETE(key);
     Storage.SET(key, value);
   },
+
+  /**
+   * 특정 key의 값이 변경될 때마다 콜백을 실행하는 구독 함수
+   * @param key 구독할 storage key
+   * @param callback 변경 시 실행할 함수 (newValue, oldValue)
+   * @returns unsubscribe 함수
+   */
+  subscribe: (key: string, callback: (newValue: any, oldValue: any) => void) => {
+    const handler = (changes: { [key: string]: chrome.storage.StorageChange }, areaName: string) => {
+      if (areaName === "local" && changes[key]) {
+        callback(changes[key].newValue, changes[key].oldValue);
+      }
+    };
+    chrome.storage.onChanged.addListener(handler);
+    // 구독 해제 함수 반환
+    return () => chrome.storage.onChanged.removeListener(handler);
+  }
 };
 
 const setBadge = () => {
@@ -98,7 +103,24 @@ export const Chrome = {
   getImageUrls,
   setBadge,
   deleteBadge,
-  reloadPage,
+  reloadPage
 };
 
 export { saveLocalStorage, removeLocalStorage, clearLocalStorage };
+
+// 상태 변경 이벤트 detail 타입 정의
+export type StatusChangeEventDetail = {
+  key: string;
+  value: string;
+};
+
+// statusChange 커스텀 이벤트 디스패처 함수
+export const dispatchStatusChangeEvent = (key: string, value: string) => {
+  const event = new CustomEvent<StatusChangeEventDetail>('statusChange', {
+    detail: {
+      key,
+      value
+    }
+  });
+  document.dispatchEvent(event);
+};

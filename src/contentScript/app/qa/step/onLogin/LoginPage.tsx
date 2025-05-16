@@ -1,17 +1,55 @@
 import React, { useEffect, useState } from "react";
-import { Button as AntdButton, message } from "antd";
+import { useQAData } from "../../../../../popup/store/qaData";
+import { message, Button as AntdButton } from "antd";
 import Button from "../../../../components/Button";
 
-const QALoginPage = () => {
-  const [successFooter, setSuccessFooter] = useState<boolean>();
-  const [successDelivery, setSuccessDelivery] = useState<boolean>();
+const Onlogin = () => {
+  const { getQAData } = useQAData();
+  const checkIsPendingPage = () => {
+    const titles = document.querySelectorAll("h2");
+    const title = Array.from(titles).find((title) => title.textContent === "로그인 상태입니다.");
+    return title ? true : false;
+  };
 
-  const [isDeliveryPage, setIsDeliveryPage] = useState<boolean>(false);
+  const [page, setPage] = useState<"smart" | "delivery" | "pending" | "default">("default");
+
+  const checkIsSmartLogin = () => {
+    // <img class='smartLoginImg'/> 확인
+    const img = document.querySelector("img.smartLoginImg");
+    if (img) {
+      return true;
+    }
+
+    return false;
+  };
+
+  useEffect(() => {
+    const location = window.location.href;
+
+    if (location.includes("noMemberOrder")) {
+      message.success("비회원 배송조회 페이지입니다.");
+      setPage("delivery");
+
+      checkDeliveryForm();
+    }
+
+    const isPendingPage = checkIsPendingPage();
+    if (isPendingPage) {
+      setPage("pending");
+      useQAData.update("pendingPage", true);
+      getQAData();
+    }
+    const isSmartLogin = checkIsSmartLogin();
+    if (isSmartLogin) {
+      setPage("smart");
+      useQAData.update("smartLogin", true);
+      getQAData();
+    }
+  }, []);
 
   const onClickFooter = () => {
     const footer = document.querySelector("#KG_footer .ment") as HTMLElement;
     if (!footer) {
-      setSuccessFooter(false);
       message.error("Footer를 찾을 수 없습니다.");
       return;
     }
@@ -23,18 +61,17 @@ const QALoginPage = () => {
 
     setTimeout(() => {
       footer.click();
-      setSuccessFooter(true);
     }, 500);
 
     setTimeout(() => {
       const popupClosedBtn = document.querySelector("#syncServicePopup .closed") as HTMLElement;
       if (!popupClosedBtn) {
-        setSuccessFooter(false);
         message.error("팝업 닫기 버튼을 찾을 수 없습니다.");
         return;
       }
+      useQAData.update("loginFooter", true);
       popupClosedBtn.click();
-    }, 1000);
+    }, 3000);
   };
 
   const onClickDelivery = () => {
@@ -43,7 +80,6 @@ const QALoginPage = () => {
     ) as HTMLElement;
 
     if (!deliveryBtn) {
-      setSuccessDelivery(false);
       message.error("비회원 배송조회 버튼을 찾을 수 없습니다.");
       return;
     }
@@ -71,14 +107,14 @@ const QALoginPage = () => {
         message.error("회원가입 버튼을 찾을 수 없습니다.");
         return;
       }
+      useQAData.update("defaultSignup", true);
       signupBtn.click();
     }, 1000);
   };
 
-  const checkDeliveryPage = () => {
+  const checkDeliveryForm = () => {
     const form = document.querySelector("#normalLogin_id") as HTMLElement;
     if (!form) {
-      setSuccessDelivery(false);
       message.error("비회원 배송조회 form을 찾을 수 없습니다.");
       return;
     }
@@ -100,64 +136,64 @@ const QALoginPage = () => {
     console.log("result", result);
     if (result) {
       message.success("비회원 배송조회 form 확인 완료");
+      useQAData.update("deliveryForm", true);
     }
 
     if (!result) {
-      setSuccessDelivery(false);
       message.error("비회원 배송조회 form에 필요한 요소가 없습니다.");
       return;
     }
-
-    setSuccessDelivery(true);
+  };
+  const onClickKakaoLogin = () => {
+    let loginBtn = null;
+    if (page === "smart") {
+      loginBtn = document.querySelector(".memberTypeLogin") as HTMLElement;
+    } else {
+      loginBtn = document.querySelector(".btnKakao") as HTMLElement;
+    }
+    if (!loginBtn) {
+      message.error("카카오 로그인 버튼을 찾을 수 없습니다.");
+      return;
+    }
+    loginBtn.style.backgroundColor = "pink";
+    message.success("카카오 로그인 버튼 클릭");
+    setTimeout(() => {
+      loginBtn.click();
+    }, 500);
   };
 
-  useEffect(() => {
-    const location = window.location.href;
-
-    if (location.includes("noMemberOrder")) {
-      message.success("비회원 배송조회 페이지입니다.");
-      setIsDeliveryPage(true);
-
-      checkDeliveryPage();
-    }
-  }, []);
-
+  const mapPage = {
+    smart: "스마트 로그인 페이지",
+    delivery: "비회원 배송조회 페이지",
+    default: "로그인 페이지"
+  };
   return (
     <div>
-      <div className="kg_con">
-        <div className="kg_title">로그인 확인</div>
-        <div className="kg_sub">{isDeliveryPage ? "비회원 배송조회 페이지" : "로그인 화면을 확인합니다."}</div>
+      <div className="kg_title">{mapPage[page]}</div>
 
-        <div className="kg_sub">
-          {successFooter !== undefined && (
-            <div>
-              Footer :<span style={{ color: successFooter ? "blue" : "red" }}>{successFooter ? "성공" : "실패"}</span>
-            </div>
-          )}
-          {successDelivery !== undefined && (
-            <div>
-              비회원 배송조회 영역 확인 :
-              <span style={{ color: successDelivery ? "blue" : "red" }}>{successDelivery ? "성공" : "실패"}</span>
-            </div>
-          )}
-        </div>
-        <div className="mt-3">
-          <AntdButton onClick={onClickFooter} type="dashed">
+      <div className="kg_sub">
+        {page === "default" && (
+          <AntdButton className="ml-3" onClick={onClickFooter} type="dashed">
             Footer
           </AntdButton>
-          {!isDeliveryPage && (
-            <AntdButton className="ml-3" onClick={onClickDelivery} type="dashed">
-              비회원 배송조회 이동
-            </AntdButton>
-          )}
-        </div>
-
-        <Button className="mt-3" onClick={onClickSignup}>
-          회원가입 페이지 이동
-        </Button>
+        )}
+        {page === "default" && (
+          <AntdButton className="ml-3" onClick={onClickDelivery} type="dashed">
+            비회원 배송조회 이동
+          </AntdButton>
+        )}
+        {page === "default" && (
+          <AntdButton className="ml-3" onClick={onClickSignup} type="dashed">
+            회원가입 페이지 이동
+          </AntdButton>
+        )}
       </div>
+
+      <Button className="mt-3" onClick={onClickKakaoLogin}>
+        로그인
+      </Button>
     </div>
   );
 };
 
-export default QALoginPage;
+export default Onlogin;

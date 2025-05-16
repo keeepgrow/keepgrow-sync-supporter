@@ -61,7 +61,7 @@ const Wrapper = styled.div`
     margin-top: 10px;
 
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     padding: 2px 20px;
   }
