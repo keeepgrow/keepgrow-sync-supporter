@@ -11,53 +11,75 @@ const Cafe24Domain = () => {
   useEffect(() => {
     getPatchData();
   }, []);
+  const findMainDomain = () => {
+    const tbody = document.querySelector("tbody");
+    if (!tbody) {
+      message.error("tbody를 찾을 수 없습니다.");
+      return null;
+    }
+
+    const rows = tbody.getElementsByTagName("tr");
+    for (const row of rows) {
+      const text = row.textContent || "";
+      if (text.includes("상점대표 도메인")) {
+        const firstTd = row.getElementsByTagName("td")[0] as HTMLTableCellElement;
+        firstTd.style.backgroundColor = "#ffff73";
+        let domain = firstTd.textContent?.trim();
+        domain = domain.replace("대표 도메인 변경", "");
+        domain = domain.trim();
+        return domain;
+      }
+    }
+    return null;
+  };
+  const findDefaultDomain = () => {
+    const tbody = document.querySelector("tbody");
+    if (!tbody) {
+      message.error("tbody를 찾을 수 없습니다.");
+      return null;
+    }
+
+    const rows = tbody.getElementsByTagName("tr");
+    for (const row of rows) {
+      const text = row.textContent || "";
+      if (text.includes("기본제공 도메인")) {
+        const firstTd = row.getElementsByTagName("td")[0] as HTMLTableCellElement;
+        firstTd.style.backgroundColor = "#35ff5d";
+        let domain = firstTd.textContent?.trim();
+        return domain;
+      }
+    }
+    return null;
+  };
+
   const onClick = async () => {
     // 요소를 찾고 처리하는 함수
-    const findDomainRow = () => {
-      const tbody = document.querySelector("tbody");
-      if (!tbody) {
-        message.error("tbody를 찾을 수 없습니다.");
-        return null;
-      }
 
-      const rows = tbody.getElementsByTagName("tr");
-      for (const row of rows) {
-        const text = row.textContent || "";
-        if (text.includes("상점대표 도메인")) {
-          return row;
-        }
-      }
-      return null;
-    };
-
-    const row = findDomainRow();
-    if (row) {
-      const tds = row.getElementsByTagName("td");
-
-      // td들의 내용 확인
-      Array.from(tds).forEach((td, index) => {
-        console.log(`${index}번째 td:`, td.textContent?.trim());
-      });
-
-      // 특정 td 선택 (예: 첫 번째 td)
-      const firstTd = tds[0] as HTMLTableCellElement;
-      firstTd.style.backgroundColor = "#ffff73";
-
-      let domain = firstTd.textContent?.trim();
-      domain = domain.replace("대표 도메인 변경", "");
-
-      if (firstTd) {
-        usePatchData.updateDomain(domain);
-        message.success(`도메인이 저장되었습니다 : ${domain}`);
-        getPatchData();
-        await Note.add(`domain : ${domain}`);
-        setTimeout(() => {
-          window.close();
-        }, 2000);
-      }
-    } else {
-      message.error("도메인을 찾을 수 없습니다.");
+    const domain = findMainDomain();
+    console.log("domain", domain);
+    if (domain) {
+      usePatchData.updateDomain(domain);
+      message.success(`도메인이 저장되었습니다 : ${domain}`);
+      getPatchData();
+      await Note.add(`domain : ${domain}`);
+      setTimeout(() => {
+        window.close();
+      }, 2000);
+      return;
     }
+    const defaultDomain = findDefaultDomain();
+    console.log("defaultDomain", defaultDomain);
+    if (defaultDomain) {
+      usePatchData.updateDomain(defaultDomain);
+      message.success(`도메인이 저장되었습니다 : ${defaultDomain}`);
+      getPatchData();
+      await Note.add(`domain : ${defaultDomain}`);
+      setTimeout(() => {
+        window.close();
+      }, 2000);
+      return;
+    }
+    message.error("도메인을 찾을 수 없습니다.");
   };
 
   return (
