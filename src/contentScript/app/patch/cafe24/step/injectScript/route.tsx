@@ -4,12 +4,14 @@ import Cafe24MainPage from "./MainPage";
 import NotMatchingPage4 from "./NotMatchingPage";
 import Cafe24ManagePage from "./Manage";
 import Cafe24DesignPage from "./Design";
+import Cafe24ChangePWPage from "../checkHosting/Cafe24ChangePW";
 
 const InjectScript = () => {
   const location = window.location.href;
 
   enum steps {
     login,
+    changePassword,
     cafe24Main,
     cafe24Manage,
     cafe24Design,
@@ -20,6 +22,10 @@ const InjectScript = () => {
   const urlCheck = () => {
     if (location.includes("eclogin.cafe24.com/Shop")) {
       setPage(steps.login);
+      return;
+    }
+    if (location.includes("user.cafe24.com/comLogin")) {
+      setPage(steps.changePassword);
       return;
     }
 
@@ -46,6 +52,7 @@ const InjectScript = () => {
     <>
       {page === steps.login && <Cafe24LoginPage />}
       {page === steps.cafe24Main && <Cafe24MainPage />}
+      {page === steps.changePassword && <Cafe24ChangePWPage />}
       {page === steps.cafe24Manage && <Cafe24ManagePage />}
       {page === steps.cafe24Design && <Cafe24DesignPage />}
       {page === steps.nm && <NotMatchingPage4 />}

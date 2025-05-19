@@ -22,7 +22,7 @@ const Cafe24Mobile = () => {
     setTimeout(() => {
       const res = document.querySelectorAll("input[name='isUse']")[0] as HTMLInputElement;
       (res.parentElement as HTMLElement).style.backgroundColor = "#ffff73";
-      setResponsive(res?.checked || false);
+      setResponsive(!res?.checked || false);
     }, 200);
   }, []);
 

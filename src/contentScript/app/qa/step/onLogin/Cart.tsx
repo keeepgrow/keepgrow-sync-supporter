@@ -11,7 +11,6 @@ const Cart = () => {
       const isPopup = document.querySelector(".kg-booster-content");
 
       if (isPopup) {
-        useQAData.update("basketModal", true);
         message.success("팝업 확인");
       } else {
         message.error("팝업 확인 실패");

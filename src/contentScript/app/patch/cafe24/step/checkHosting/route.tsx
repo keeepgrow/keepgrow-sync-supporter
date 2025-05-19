@@ -35,7 +35,6 @@ const MoveHosting = () => {
       setPage(steps.changePassword);
       return;
     }
-    // "main/dashboard" 이고 "cafe24.com/disp/admin" 가포함 되어있으면
     if (location.includes("cafe24.com/disp/admin") && location.includes("main/dashboard")) {
       setPage(steps.cafe24Home);
       return;
@@ -44,7 +43,6 @@ const MoveHosting = () => {
       setPage(steps.cafe24Domain);
       return;
     }
-    // https://chan01.cafe24.com/disp/admin/shop1/Member/Oauth2ClientConfig
     if (location.includes("cafe24.com/disp/admin/") && location.includes("Member/Oauth2ClientConfig")) {
       setPage(steps.cafe24JsKey);
       return;

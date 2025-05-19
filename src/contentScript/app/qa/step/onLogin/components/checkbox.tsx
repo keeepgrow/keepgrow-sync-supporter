@@ -12,7 +12,6 @@ const LoginCheckbox = () => {
     "loginFooter",
     "deliveryForm",
     "defaultSignup",
-    "basketModal"
   ];
   const mapTitle = {
     mappingLogin: "매핑 로그인",
@@ -21,7 +20,6 @@ const LoginCheckbox = () => {
     loginFooter: "푸터 모달 확인",
     deliveryForm: "배송 폼 확인",
     defaultSignup: "기본 회원가입 창",
-    basketModal: "장바구니 모달"
   };
 
   useEffect(() => {

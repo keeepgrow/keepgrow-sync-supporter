@@ -15,12 +15,12 @@ const OnLoginRemote = () => {
     window.location.href = `/exec/front/Member/logout`;
   };
 
-  const onClickCart = () => {
-    window.location.href = "/order/basket.html";
+  const onClickAgreement = () => {
+    window.location.href = "/order/agreement.html";
   };
 
-  const onClickMapping = () => {
-    window.location.href = "/member/mapping_login.html";
+  const onClickSignup = () => {
+    window.location.href = "/member/join.html";
   };
 
   return (
@@ -37,11 +37,11 @@ const OnLoginRemote = () => {
           <Button onClick={onClickLoginPage} type="default">
             login
           </Button>
-          <Button onClick={onClickCart} type="default">
-            basket
+          <Button onClick={onClickAgreement} type="default">
+            회원가입A
           </Button>
-          <Button onClick={onClickMapping} type="default">
-            mapping
+          <Button onClick={onClickSignup} type="default">
+            회원가입J
           </Button>
           <Button onClick={onClickLogout} type="default" danger>
             logout

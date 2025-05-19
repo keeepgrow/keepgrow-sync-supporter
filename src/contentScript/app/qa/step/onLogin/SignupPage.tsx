@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button as AntdButton, message } from "antd";
 import Button from "../../../../components/Button";
 import { useQAData } from "../../../../../popup/store/qaData";
+import styled from "styled-components";
 
 const QASignupPage = () => {
   const [successFooter, setSuccessFooter] = useState<boolean>();
@@ -76,14 +77,14 @@ const QASignupPage = () => {
           )}
         </div>
 
-        <div className="mt-3">
+        <Wrapper>
           <AntdButton onClick={onClickFooter} type="dashed">
-            Footer 확인
+            [푸터] 클릭
           </AntdButton>
           <AntdButton className="ml-3" onClick={onClickSignup} type="dashed">
             일반 회원가입
           </AntdButton>
-        </div>
+        </Wrapper>
         <Button className="mt-3" onClick={onClickKakaoLogin}>
           카카오 로그인 확인
         </Button>
@@ -91,5 +92,14 @@ const QASignupPage = () => {
     </div>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  button {
+    width: auto;
+  }
+`;
 
 export default QASignupPage;

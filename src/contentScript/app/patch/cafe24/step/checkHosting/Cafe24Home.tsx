@@ -4,7 +4,7 @@ import { STORAGE_PATCH_KEY, usePatchData } from "../../../../../../popup/store/p
 import { Button as AntdButton, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { RedoOutlined } from "@ant-design/icons"; // 화살표 아이콘 import
+import { RedoOutlined, DesktopOutlined, MobileOutlined } from "@ant-design/icons"; // 화살표 아이콘 import
 
 const Cafe24Home = () => {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const Cafe24Home = () => {
     window.open(newLocation);
   };
 
-  const onClickMobile = () => {
+  const onClickResponsive = () => {
     const location = window.location.href;
     let newLocation = location.replace("main/dashboard", "manage/mobile");
 
@@ -61,6 +61,20 @@ const Cafe24Home = () => {
     };
   }, []);
 
+  const onClickPC = () => {
+    const btn = document.querySelector(".btnDevice.pc") as HTMLButtonElement;
+    if (btn) {
+      btn.click();
+    }
+  };
+
+  const onClickMobile = () => {
+    const btn = document.querySelector(".btnDevice.mobile") as HTMLButtonElement;
+    if (btn) {
+      btn.click();
+    }
+  };
+
   return (
     <Wrapper>
       <div className="kg_con">
@@ -78,8 +92,14 @@ const Cafe24Home = () => {
           <AntdButton variant="dashed" onClick={onClickJsKey}>
             jsKey 확인
           </AntdButton>
-          <AntdButton variant="dashed" onClick={onClickMobile}>
+          <AntdButton variant="dashed" onClick={onClickResponsive}>
             반응형 확인
+          </AntdButton>
+          <AntdButton variant="filled" onClick={onClickPC}>
+            <DesktopOutlined />
+          </AntdButton>
+          <AntdButton variant="filled" onClick={onClickMobile}>
+            <MobileOutlined />
           </AntdButton>
           <AntdButton variant="filled" onClick={onClickRefresh}>
             <RedoOutlined />

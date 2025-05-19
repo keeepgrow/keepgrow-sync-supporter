@@ -17,7 +17,6 @@ export class QAData {
   loginFooter: boolean = false;
   deliveryForm: boolean = false;
   defaultSignup: boolean = false;
-  basketModal: boolean = false;
 
   constructor(qaData?: QAData) {
     if (!qaData) {
@@ -34,7 +33,6 @@ export class QAData {
     this.loginFooter = qaData?.loginFooter;
     this.deliveryForm = qaData?.deliveryForm;
     this.defaultSignup = qaData?.defaultSignup;
-    this.basketModal = qaData?.basketModal;
   }
 }
 
