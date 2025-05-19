@@ -4,7 +4,8 @@
   "description": "KG-Helper",
   "scripts": {
     "start": "webpack --watch --progress --config webpack.dev.js",
-    "build": "webpack --progress --config webpack.prod.js"
+    "build": "webpack --progress --config webpack.prod.js",
+    "pull": "git pull origin main && npm run build"
   },
   "author": "",
   "devDependencies": {
