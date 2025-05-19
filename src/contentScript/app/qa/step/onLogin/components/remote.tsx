@@ -28,6 +28,9 @@ const OnLoginRemote = () => {
       <Wrapper>
         <h4>remote</h4>
         <div className="btn-wrapper">
+          <Button className={`kg_sub_title`} onClick={() => window.location.reload()} color="cyan">
+            새로고침
+          </Button>
           <Button onClick={onClickMain} type="default">
             main
           </Button>

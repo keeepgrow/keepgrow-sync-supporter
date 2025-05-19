@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { message } from "antd";
+import { useQAData } from "../../../../../popup/store/qaData";
 
 const Cart = () => {
   useEffect(() => {
@@ -8,8 +9,9 @@ const Cart = () => {
     window.scrollTo({ top: scrollHeight, behavior: "smooth" } as ScrollToOptions);
     setTimeout(() => {
       const isPopup = document.querySelector(".kg-booster-content");
-      console.log("isPopup", isPopup);
+
       if (isPopup) {
+        useQAData.update("basketModal", true);
         message.success("팝업 확인");
       } else {
         message.error("팝업 확인 실패");

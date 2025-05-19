@@ -1,12 +1,28 @@
 import React, { useEffect } from "react";
 import { STORAGE_QA_KEY, useQAData } from "../../../../../../popup/store/qaData";
 import styled from "styled-components";
-import { Button } from "antd";
 
 const LoginCheckbox = () => {
   const { getQAData, qaData } = useQAData();
 
-  const checkList = ["mappingLogin", "pendingPage", "smartLogin", "loginFooter", "deliveryForm", "defaultSignup"];
+  const checkList = [
+    "mappingLogin",
+    "pendingPage",
+    "smartLogin",
+    "loginFooter",
+    "deliveryForm",
+    "defaultSignup",
+    "basketModal"
+  ];
+  const mapTitle = {
+    mappingLogin: "매핑 로그인",
+    pendingPage: "로그인 상태입니다.",
+    smartLogin: "스마트 로그인",
+    loginFooter: "푸터 모달 확인",
+    deliveryForm: "배송 폼 확인",
+    defaultSignup: "기본 회원가입 창",
+    basketModal: "장바구니 모달"
+  };
 
   useEffect(() => {
     const handler = (e: Event) => {
@@ -23,13 +39,10 @@ const LoginCheckbox = () => {
 
   return (
     <Wrapper>
-      <Button className={`kg_sub_title`} onClick={() => window.location.reload()} color="cyan">
-        페이지 새로고침
-      </Button>
       {qaData &&
         checkList.map((check) => (
           <div key={check} className={`kg_sub_title ${qaData[check] || false ? "kg_sub_title_success" : ""}`}>
-            {check}
+            {mapTitle[check]}
           </div>
         ))}
     </Wrapper>
