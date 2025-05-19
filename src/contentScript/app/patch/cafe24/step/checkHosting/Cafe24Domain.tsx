@@ -58,7 +58,7 @@ const Cafe24Domain = () => {
     const domain = findMainDomain();
     console.log("domain", domain);
     if (domain) {
-      usePatchData.updateDomain(domain);
+      usePatchData.update("domain", domain);
       message.success(`도메인이 저장되었습니다 : ${domain}`);
       getPatchData();
       await Note.add(`domain : ${domain}`);
@@ -70,7 +70,7 @@ const Cafe24Domain = () => {
     const defaultDomain = findDefaultDomain();
     console.log("defaultDomain", defaultDomain);
     if (defaultDomain) {
-      usePatchData.updateDomain(defaultDomain);
+      usePatchData.update("domain", defaultDomain);
       message.success(`도메인이 저장되었습니다 : ${defaultDomain}`);
       getPatchData();
       await Note.add(`domain : ${defaultDomain}`);

@@ -8,9 +8,6 @@ import { Note } from "../../../../../../popup/store/note";
 const Cafe24JsKey = () => {
   const { getPatchData, patchData } = usePatchData();
 
-  useEffect(() => {
-    getPatchData();
-  }, []);
   const onClick = async () => {
     const findJsKeyElement = () => {
       const element = document.querySelector(".kakaosync_javascript_key");
@@ -20,13 +17,14 @@ const Cafe24JsKey = () => {
     const element = findJsKeyElement();
     if (element) {
       element.style.backgroundColor = "#ffff73";
-      usePatchData.updateJsKey(element.textContent?.trim());
-      message.success(`jsKey가 저장되었습니다 : ${element.textContent?.trim()}`);
+      const jsKey = element.textContent?.trim();
+      usePatchData.update("jsKey", jsKey);
+      message.success(`jsKey가 저장되었습니다 : ${jsKey}`);
       getPatchData();
       setTimeout(() => {
         window.close();
       }, 2000);
-      await Note.add(`jsKey : ${element.textContent?.trim()}`);
+      await Note.add(`jsKey : ${jsKey}`);
     } else {
       message.error("jsKey를 찾을 수 없습니다.");
     }

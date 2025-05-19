@@ -52,7 +52,7 @@ const UpdateScriptPage = ({ hosting }: { hosting: "CAFE24" | "IMWEB" }) => {
   }, [src, dataEnvMobile]);
 
   const onClick = () => {
-    usePatchData.saveScript(textAreaValue);
+    usePatchData.update("script", textAreaValue);
     message.success("스크립트가 저장되었습니다.");
 
     setTimeout(() => {

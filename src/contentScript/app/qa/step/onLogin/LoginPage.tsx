@@ -174,17 +174,17 @@ const Onlogin = () => {
       <div className="kg_sub">
         {page === "default" && (
           <AntdButton className="ml-3" onClick={onClickFooter} type="dashed">
-            Footer
+            [푸터] 클릭
           </AntdButton>
         )}
         {page === "default" && (
           <AntdButton className="ml-3" onClick={onClickDelivery} type="dashed">
-            비회원 배송조회 이동
+            [비회원 배송조회] 클릭
           </AntdButton>
         )}
         {page === "default" && (
           <AntdButton className="ml-3" onClick={onClickSignup} type="dashed">
-            회원가입 페이지 이동
+            [회원가입] 클릭
           </AntdButton>
         )}
       </div>

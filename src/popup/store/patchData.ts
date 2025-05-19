@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Chrome, Storage } from "../utils/ChromeApi";
+import { Chrome, dispatchStatusChangeEvent, Storage } from "../utils/ChromeApi";
 import { Note } from "./note";
 
 export const STORAGE_PATCH_KEY = "kgPatchData";
@@ -12,6 +12,7 @@ export class PatchData {
   script?: string;
   domain?: string;
   jsKey?: string;
+  responsive?: boolean = false;
   constructor(patchData?: PatchData) {
     if (!patchData) {
       return;
@@ -23,6 +24,7 @@ export class PatchData {
     this.script = patchData?.script;
     this.domain = patchData?.domain;
     this.jsKey = patchData?.jsKey;
+    this.responsive = patchData?.responsive;
   }
 }
 
@@ -92,23 +94,14 @@ usePatchData.endPatch = () => {
   window.location.reload();
 };
 
-usePatchData.updateDomain = async (domain) => {
+usePatchData.update = async (type, value) => {
   const data = await getPatchData();
   if (!data) return false;
 
-  data.domain = domain;
+  data[type] = value;
   const patchData = JSON.stringify(data);
   await Storage.SET(STORAGE_PATCH_KEY, patchData);
-  return patchData;
-};
-
-usePatchData.updateJsKey = async (jsKey) => {
-  const data = await getPatchData();
-  if (!data) return false;
-
-  data.jsKey = jsKey;
-  const patchData = JSON.stringify(data);
-  await Storage.SET(STORAGE_PATCH_KEY, patchData);
+  dispatchStatusChangeEvent(STORAGE_PATCH_KEY, value);
   return patchData;
 };
 
@@ -135,13 +128,5 @@ usePatchData.saveUserInfo = async ({ id, password }) => {
   if (!data) return;
 
   data.userInfo = { id, password };
-  Storage.SET(STORAGE_PATCH_KEY, JSON.stringify(data));
-};
-
-usePatchData.saveScript = async (script) => {
-  const data = await getPatchData();
-  if (!data) return;
-
-  data.script = script;
   Storage.SET(STORAGE_PATCH_KEY, JSON.stringify(data));
 };

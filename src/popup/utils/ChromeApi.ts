@@ -116,11 +116,19 @@ export type StatusChangeEventDetail = {
 
 // statusChange 커스텀 이벤트 디스패처 함수
 export const dispatchStatusChangeEvent = (key: string, value: string) => {
-  const event = new CustomEvent<StatusChangeEventDetail>('statusChange', {
+  const event = new CustomEvent<StatusChangeEventDetail>("statusChange", {
     detail: {
       key,
       value
     }
   });
   document.dispatchEvent(event);
+};
+
+export const runWhenDomReady = (fn: () => void) => {
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+    fn();
+    return;
+  }
+  document.addEventListener("DOMContentLoaded", fn);
 };

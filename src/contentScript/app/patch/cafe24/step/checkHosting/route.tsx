@@ -6,6 +6,7 @@ import Cafe24Home from "./Cafe24Home";
 import Cafe24Domain from "./Cafe24Domain";
 import Cafe24JsKey from "./Cafe24JsKey";
 import Cafe24ChangePWPage from "./Cafe24ChangePW";
+import Cafe24Mobile from "./Cafe24Mobile";
 
 const MoveHosting = () => {
   const location = window.location.href;
@@ -18,6 +19,7 @@ const MoveHosting = () => {
     cafe24Home,
     cafe24Domain,
     cafe24JsKey,
+    cafe24Mobile,
     cmsModify,
     nm
   }
@@ -47,6 +49,10 @@ const MoveHosting = () => {
       setPage(steps.cafe24JsKey);
       return;
     }
+    if (location.includes("cafe24.com/disp/admin/") && location.includes("manage/mobile")) {
+      setPage(steps.cafe24Mobile);
+      return;
+    }
     if (urlMatch.every((url) => location.includes(url))) {
       setPage(steps.cmsModify);
       return;
@@ -65,6 +71,7 @@ const MoveHosting = () => {
       {page === steps.cafe24Home && <Cafe24Home />}
       {page === steps.cafe24Domain && <Cafe24Domain />}
       {page === steps.cafe24JsKey && <Cafe24JsKey />}
+      {page === steps.cafe24Mobile && <Cafe24Mobile />}
       {page === steps.nm && <NotMatchingPage />}
     </>
   );

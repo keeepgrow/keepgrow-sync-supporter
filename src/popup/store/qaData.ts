@@ -125,16 +125,6 @@ useQAData.updateDomain = async (domain) => {
   return patchData;
 };
 
-useQAData.updateJsKey = async (jsKey) => {
-  const data = await getQAData();
-  if (!data) return false;
-
-  data.jsKey = jsKey;
-  const patchData = JSON.stringify(data);
-  await Storage.SET(STORAGE_QA_KEY, patchData);
-  return patchData;
-};
-
 useQAData.updateStep = async (step, navigate?) => {
   const data = await getQAData();
   if (!data) return;

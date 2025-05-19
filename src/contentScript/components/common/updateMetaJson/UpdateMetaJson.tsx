@@ -196,6 +196,7 @@ const UpdateMetaJsonPage = ({ hosting }: { hosting: "CAFE24" | "IMWEB" }) => {
               <div className={getLabelClass(key)}>{key.replace("KGJS_", "")}</div>
               {key === "KGJS_domain" && <CopyBlock>{patchData?.domain}</CopyBlock>}
               {key === "KGJS_accessKey" && <CopyBlock>{patchData?.jsKey}</CopyBlock>}
+              {key === "KGJS_responsive" && <CopyBlock>{patchData?.responsive ? "true" : "false"}</CopyBlock>}
               {isCheckbox(key) ? (
                 <Checkbox name={key} checked={checkCheckbox(inputFields[key])} onChange={handleChange} />
               ) : (

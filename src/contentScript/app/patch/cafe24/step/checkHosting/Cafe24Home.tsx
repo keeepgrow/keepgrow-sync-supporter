@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "../../../../../components/Button";
-import { usePatchData } from "../../../../../../popup/store/patchData";
+import { STORAGE_PATCH_KEY, usePatchData } from "../../../../../../popup/store/patchData";
 import { Button as AntdButton, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -11,6 +11,7 @@ const Cafe24Home = () => {
   const { patchData, getPatchData } = usePatchData();
 
   const onClickDomain = () => {
+    // https://commetoi891007.cafe24.com/admin/php/shop1/m/company_info_f.php
     const location = window.location.href;
     let newLocation = location.replace("disp/admin", "admin/php");
     newLocation = newLocation.replace("main/dashboard", "m/company_info_f.php");
@@ -21,6 +22,13 @@ const Cafe24Home = () => {
   const onClickJsKey = () => {
     const location = window.location.href;
     let newLocation = location.replace("main/dashboard", "Member/Oauth2ClientConfig");
+
+    window.open(newLocation);
+  };
+
+  const onClickMobile = () => {
+    const location = window.location.href;
+    let newLocation = location.replace("main/dashboard", "manage/mobile");
 
     window.open(newLocation);
   };
@@ -39,6 +47,20 @@ const Cafe24Home = () => {
   const onClickRefresh = () => {
     getPatchData();
   };
+
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const customEvent = e as CustomEvent<{ key: string; value: string }>;
+      if (customEvent.detail.key === STORAGE_PATCH_KEY) {
+        getPatchData();
+      }
+    };
+    document.addEventListener("statusChange", handler);
+    return () => {
+      document.removeEventListener("statusChange", handler);
+    };
+  }, []);
+
   return (
     <Wrapper>
       <div className="kg_con">
@@ -47,6 +69,7 @@ const Cafe24Home = () => {
         <div className="info_box">
           <div>domain : {patchData?.domain || "-"}</div>
           <div>jsKey : {patchData?.jsKey || "-"}</div>
+          <div>responsive : {patchData?.responsive ? "true" : "false"}</div>
         </div>
         <div className="btn_box">
           <AntdButton variant="dashed" onClick={onClickDomain}>
@@ -54,6 +77,9 @@ const Cafe24Home = () => {
           </AntdButton>
           <AntdButton variant="dashed" onClick={onClickJsKey}>
             jsKey 확인
+          </AntdButton>
+          <AntdButton variant="dashed" onClick={onClickMobile}>
+            반응형 확인
           </AntdButton>
           <AntdButton variant="filled" onClick={onClickRefresh}>
             <RedoOutlined />
@@ -79,8 +105,9 @@ const Wrapper = styled.div`
   }
   .btn_box {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
-    justify-content: space-around;
+    justify-content: flex-start;
     margin: 20px 0;
   }
 `;
