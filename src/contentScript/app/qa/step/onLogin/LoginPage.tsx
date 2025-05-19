@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useQAData } from "../../../../../popup/store/qaData";
 import { message, Button as AntdButton } from "antd";
 import Button from "../../../../components/Button";
+import styled from "styled-components";
 
 const Onlogin = () => {
   const { getQAData } = useQAData();
@@ -172,21 +173,23 @@ const Onlogin = () => {
       <div className="kg_title">{mapPage[page]}</div>
 
       <div className="kg_sub">
-        {page === "default" && (
-          <AntdButton className="ml-3" onClick={onClickFooter} type="dashed">
-            [푸터] 클릭
-          </AntdButton>
-        )}
-        {page === "default" && (
-          <AntdButton className="ml-3" onClick={onClickDelivery} type="dashed">
-            [비회원 배송조회] 클릭
-          </AntdButton>
-        )}
-        {page === "default" && (
-          <AntdButton className="ml-3" onClick={onClickSignup} type="dashed">
-            [회원가입] 클릭
-          </AntdButton>
-        )}
+        <Wrapper>
+          {page === "default" && (
+            <AntdButton onClick={onClickFooter} type="dashed">
+              [푸터] 클릭
+            </AntdButton>
+          )}
+          {page === "default" && (
+            <AntdButton onClick={onClickDelivery} type="dashed">
+              [비회원 배송조회] 클릭
+            </AntdButton>
+          )}
+          {page === "default" && (
+            <AntdButton onClick={onClickSignup} type="dashed">
+              [회원가입] 클릭
+            </AntdButton>
+          )}
+        </Wrapper>
       </div>
 
       <Button className="mt-3" onClick={onClickKakaoLogin}>
@@ -195,5 +198,14 @@ const Onlogin = () => {
     </div>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  button {
+    width: auto;
+  }
+`;
 
 export default Onlogin;
