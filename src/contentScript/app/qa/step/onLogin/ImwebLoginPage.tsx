@@ -67,18 +67,18 @@ const ImwebLoginPage = () => {
   };
 
   const onClickDelivery = () => {
-    const deliveryBtn = Array.from(document.querySelectorAll("a")).find(
-      (el) => el.textContent?.trim() === "비회원 배송조회"
+    const deliveryBtn = Array.from(document.querySelectorAll("li a")).find(
+      (el) => el.textContent?.trim() === "비회원 주문조회" || el.textContent?.trim() === "비회원 배송조회"
     ) as HTMLElement;
 
     if (!deliveryBtn) {
-      message.error("비회원 배송조회 버튼을 찾을 수 없습니다.");
+      message.error("비회원 주문조회 버튼을 찾을 수 없습니다.");
       return;
     }
 
     deliveryBtn.style.backgroundColor = "yellowgreen";
 
-    message.success("비회원 배송조회 버튼 클릭");
+    message.success("비회원 주문조회 버튼 클릭");
     deliveryBtn.click();
 
     setTimeout(() => {
@@ -153,7 +153,7 @@ const ImwebLoginPage = () => {
 
   const mapPage = {
     smart: "스마트 로그인 페이지",
-    delivery: "비회원 배송조회 페이지",
+    delivery: "비회원 주문조회 페이지",
     default: "로그인 페이지"
   };
   return (
@@ -169,7 +169,7 @@ const ImwebLoginPage = () => {
           )}
           {page === "default" && (
             <AntdButton onClick={onClickDelivery} type="dashed">
-              [비회원 배송조회] 클릭
+              [비회원 주문조회] 클릭
             </AntdButton>
           )}
           {page === "default" && (

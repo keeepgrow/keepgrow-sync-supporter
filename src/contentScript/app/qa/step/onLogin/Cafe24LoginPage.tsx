@@ -28,7 +28,7 @@ const Cafe24LoginPage = () => {
     const location = window.location.href;
 
     if (location.includes("noMemberOrder")) {
-      message.success("비회원 배송조회 페이지입니다.");
+      message.success("비회원 주문조회 페이지입니다.");
       setPage("delivery");
 
       checkDeliveryForm();
@@ -77,17 +77,17 @@ const Cafe24LoginPage = () => {
 
   const onClickDelivery = () => {
     const deliveryBtn = Array.from(document.querySelectorAll("a")).find(
-      (el) => el.textContent?.trim() === "비회원 배송조회"
+      (el) => el.textContent?.trim() === "비회원 주문조회" || el.textContent?.trim() === "비회원 배송조회"
     ) as HTMLElement;
 
     if (!deliveryBtn) {
-      message.error("비회원 배송조회 버튼을 찾을 수 없습니다.");
+      message.error("비회원 주문조회 버튼을 찾을 수 없습니다.");
       return;
     }
 
     deliveryBtn.style.backgroundColor = "yellowgreen";
 
-    message.success("비회원 배송조회 버튼 클릭");
+    message.success("비회원 주문조회 버튼 클릭");
 
     setTimeout(() => {
       deliveryBtn.click();
@@ -116,7 +116,7 @@ const Cafe24LoginPage = () => {
   const checkDeliveryForm = () => {
     const form = document.querySelector("#normalLogin_id") as HTMLElement;
     if (!form) {
-      message.error("비회원 배송조회 form을 찾을 수 없습니다.");
+      message.error("비회원 주문조회 form을 찾을 수 없습니다.");
       return;
     }
     // form 안에 Input 을 확인 - 주문자명, 주문번호, 비회원주문 비밀번호 가  포함된걸 확인
@@ -136,12 +136,12 @@ const Cafe24LoginPage = () => {
     });
     console.log("result", result);
     if (result) {
-      message.success("비회원 배송조회 form 확인 완료");
+      message.success("비회원 주문조회 form 확인 완료");
       useQAData.update("deliveryForm", true);
     }
 
     if (!result) {
-      message.error("비회원 배송조회 form에 필요한 요소가 없습니다.");
+      message.error("비회원 주문조회 form에 필요한 요소가 없습니다.");
       return;
     }
   };
@@ -165,7 +165,7 @@ const Cafe24LoginPage = () => {
 
   const mapPage = {
     smart: "스마트 로그인 페이지",
-    delivery: "비회원 배송조회 페이지",
+    delivery: "비회원 주문조회 페이지",
     default: "로그인 페이지"
   };
   return (
@@ -181,7 +181,7 @@ const Cafe24LoginPage = () => {
           )}
           {page === "default" && (
             <AntdButton onClick={onClickDelivery} type="dashed">
-              [비회원 배송조회] 클릭
+              [비회원 주문조회] 클릭
             </AntdButton>
           )}
           {page === "default" && (
