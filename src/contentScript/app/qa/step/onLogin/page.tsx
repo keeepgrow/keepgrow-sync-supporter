@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { getQAData, QAData, useQAData } from "../../../../../popup/store/qaData";
 import MappingLoginPage from "./MappginLogin";
-import LoginPage from "./LoginPage";
-import Cart from "./Cart";
 import LoginCheckbox from "./components/checkbox";
 import QAKakaoLoginPage from "./KakaoLoginPage";
 import NoMatch from "./NoMatch";
 import QASignupPage from "./SignupPage";
 import OnLoginRemote from "./components/remote";
 import Button from "../../../../components/Button";
-
+import Cafe24LoginPage from "./Cafe24LoginPage";
+import ImwebLoginPage from "./ImwebLoginPage";
 const QAOnLogin = ({ hosting }: { hosting: string }) => {
   const location = window.location.href;
 
   enum steps {
     mappingLogin,
     login,
-    cart,
     noMatch,
     kakaoLogin,
     signup
@@ -33,12 +31,12 @@ const QAOnLogin = ({ hosting }: { hosting: string }) => {
   }, []);
 
   const mappingLoginPage = ["/member/mapping_login.html"];
-  const loginPage = ["/member/login.html"];
-  const cartPage = ["/order/basket.html"];
+  const loginPage = ["/member/login.html", "/login"];
   const kakaoLoginPage = ["/accounts.kakao.com/login/", "kauth.kakao.com/"];
-  const signupPage = ["/member/join.html", "/member/agreement.html", "/signup"];
+  const signupPage = ["/member/join.html", "/member/agreement.html", "/site_join_type_choice"];
 
   const urlCheck = () => {
+    console.log("location", qaData);
     if (!qaData) return;
 
     if (kakaoLoginPage.some((page) => location.includes(page))) {
@@ -59,14 +57,11 @@ const QAOnLogin = ({ hosting }: { hosting: string }) => {
       setPage(steps.login);
       return;
     }
-    if (cartPage.some((page) => location.includes(page))) {
-      setPage(steps.cart);
-      return;
-    }
-    // if (signupPage.some((page) => location.includes(page))) {
-    //   setPage(steps.signup);
+    // if (cartPage.some((page) => location.includes(page))) {
+    //   setPage(steps.cart);
     //   return;
     // }
+
     setPage(steps.noMatch);
     return;
   };
@@ -77,14 +72,14 @@ const QAOnLogin = ({ hosting }: { hosting: string }) => {
     <>
       <div className="kg_con">
         {page === steps.mappingLogin && <MappingLoginPage />}
-        {page === steps.login && <LoginPage />}
+        {page === steps.login && hosting === "cafe24" && <Cafe24LoginPage />}
+        {page === steps.login && hosting === "imweb" && <ImwebLoginPage />}
         {page === steps.signup && <QASignupPage />}
 
-        {page === steps.cart && <Cart />}
         {page === steps.kakaoLogin && <QAKakaoLoginPage />}
         {page === steps.noMatch && <NoMatch hosting={hosting} />}
-        <OnLoginRemote />
-        <LoginCheckbox />
+        <OnLoginRemote hosting={hosting} />
+        <LoginCheckbox hosting={hosting} />
       </div>
       <Button className="mt-3" onClick={() => useQAData.endQA()}>
         QA 종료

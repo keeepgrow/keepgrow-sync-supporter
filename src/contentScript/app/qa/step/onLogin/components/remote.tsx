@@ -2,7 +2,7 @@ import { Button } from "antd";
 import React from "react";
 import styled from "styled-components";
 
-const OnLoginRemote = () => {
+const OnLoginRemote = ({ hosting }: { hosting: string }) => {
   const onClickMain = () => {
     window.location.href = "/";
   };
@@ -22,6 +22,44 @@ const OnLoginRemote = () => {
   const onClickSignup = () => {
     window.location.href = "/member/join.html";
   };
+
+  const onClickImwebLogin = () => {
+    window.location.href = "/login";
+  };
+
+  const onClickImwebSignup = () => {
+    window.location.href = "/site_join_type_choice";
+  };
+  const onClickImwebLogout = () => {
+    window.location.href = `/logout.cm`;
+  };
+
+  if (hosting === "imweb") {
+    return (
+      <>
+        <Wrapper>
+          <div className="kg_title">remote</div>
+          <div className="btn-wrapper">
+            <Button className={`kg_sub_title`} onClick={() => window.location.reload()} color="cyan">
+              새로고침
+            </Button>
+            <Button onClick={onClickMain} type="default">
+              main
+            </Button>
+            <Button onClick={onClickImwebLogin} type="default">
+              login
+            </Button>
+            <Button onClick={onClickImwebSignup} type="default">
+              회원가입
+            </Button>
+            <Button onClick={onClickImwebLogout} type="default" danger>
+              logout
+            </Button>
+          </div>
+        </Wrapper>
+      </>
+    );
+  }
 
   return (
     <>
@@ -67,7 +105,7 @@ const Wrapper = styled.div`
     gap: 10px;
   }
   button {
-    width: 80px;
+    width: 75px;
   }
 `;
 

@@ -16,7 +16,7 @@ const QACheckDomain = ({ hosting }: { hosting: string }) => {
     console.log(qaData);
     if (!qaData) return;
 
-    if (location.includes(qaData.domain)) {
+    if (location.includes(qaData.domain) || !location.includes("/admin")) {
       setPage(steps.inDomain);
       return;
     }

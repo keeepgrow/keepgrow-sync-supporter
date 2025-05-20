@@ -70,7 +70,7 @@ const createtIcon = () => {
     align-items: center;
     border-radius: 50%;
     cursor: pointer;
-    z-index: 10000;
+    z-index: 100000;
   `;
 
   const image = document.createElement("img");

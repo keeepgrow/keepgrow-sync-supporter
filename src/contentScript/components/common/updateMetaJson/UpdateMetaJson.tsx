@@ -9,14 +9,24 @@ import Button from "../../Button";
 
 const UpdateMetaJsonPage = ({ hosting }: { hosting: "CAFE24" | "IMWEB" }) => {
   const navigate = useNavigate();
-  const [inputFields, setInputFields] = useState({
-    KGJS_responsive: false,
-    KGJS_shopName: "",
-    KGJS_logoName: "",
-    KGJS_accessKey: "",
-    KGJS_domain: "",
-    KGJS_uiHide: false
-  });
+
+  const DEFAULT_INPUT_FIELD = {
+    CAFE24: {
+      KGJS_responsive: false,
+      KGJS_shopName: "",
+      KGJS_logoName: "",
+      KGJS_accessKey: "",
+      KGJS_domain: "",
+      KGJS_uiHide: false
+    },
+    IMWEB: {
+      KGJS_domain: "",
+      KGJS_logoName: "",
+      KGJS_shopName: "",
+      KGJS_uiHide: false
+    }
+  };
+  const [inputFields, setInputFields] = useState(DEFAULT_INPUT_FIELD[hosting]);
 
   const [textAreaValue, setTextAreaValue] = useState("");
   const kgtextArea = document.querySelector("#copyMetaJson") as HTMLTextAreaElement;
@@ -140,7 +150,7 @@ const UpdateMetaJsonPage = ({ hosting }: { hosting: "CAFE24" | "IMWEB" }) => {
   const getLabelClass = (key) => (highlightFields.includes(key) ? "highlight input_label" : "input_label");
 
   const onClick = async () => {
-    // await usePatchData.updateDomain(inputFields["KGJS_domain"]);
+    await usePatchData.update("domain", inputFields["KGJS_domain"]);
 
     message.success(`MetaJson이 저장되었습니다.`);
     kgtextArea.value = textAreaValue;

@@ -4,7 +4,7 @@ import { message, Button as AntdButton } from "antd";
 import Button from "../../../../components/Button";
 import styled from "styled-components";
 
-const Onlogin = () => {
+const Cafe24LoginPage = () => {
   const { getQAData } = useQAData();
   const checkIsPendingPage = () => {
     const titles = document.querySelectorAll("h2");
@@ -208,4 +208,4 @@ const Wrapper = styled.div`
   }
 `;
 
-export default Onlogin;
+export default Cafe24LoginPage;

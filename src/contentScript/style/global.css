@@ -7,7 +7,7 @@
   bottom: 100px;
   right: 50px;
   border-radius: 20px;
-  z-index: 10000;
+  z-index: 100000;
   overflow-y: auto;
   opacity: 0.7;
   color: #333;

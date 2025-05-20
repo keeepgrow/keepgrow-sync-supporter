@@ -3,17 +3,16 @@ import styled from "styled-components";
 import { message } from "antd";
 import { PatchData, usePatchData } from "../../../../../../popup/store/patchData";
 import Button from "../../../../../components/Button";
+import { useQAData } from "../../../../../../popup/store/qaData";
+import { useNavigate } from "react-router-dom";
 
 const ImwebSettingPage = () => {
-  const { getPatchData } = usePatchData();
-  const [patchData, setPatchData] = useState<PatchData>();
+  const { getPatchData, patchData } = usePatchData();
 
-  const getData = async () => {
-    const patchData = await getPatchData();
-    if (patchData) setPatchData(patchData);
-  };
+  const { startQA } = useQAData();
+
   useEffect(() => {
-    getData();
+    getPatchData();
   }, []);
 
   const onClickScriptCopy = () => {
@@ -25,6 +24,15 @@ const ImwebSettingPage = () => {
   const onClickQuit = () => {
     usePatchData.endPatch();
   };
+
+  const navigate = useNavigate();
+
+  const onStartQA = async () => {
+    await usePatchData.endPatch();
+    startQA(patchData.hosting, patchData.domain);
+    navigate(`/qa/${patchData.hosting}`);
+  };
+
   return (
     <Wrapper>
       <div className="kg_con">
@@ -32,6 +40,9 @@ const ImwebSettingPage = () => {
         <div className="kg_sub">통합스크립트를 Body Code에 주입하세요</div>
 
         <Button onClick={onClickScriptCopy}>통합 스크립트 복사</Button>
+        <Button className="mt-4" color="secondary" onClick={onStartQA}>
+          QA 시작
+        </Button>
         <Button className="mt-4" color="warning" onClick={onClickQuit}>
           패치 종료
         </Button>

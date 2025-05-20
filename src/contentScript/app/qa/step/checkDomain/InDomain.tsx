@@ -4,17 +4,15 @@ import Button from "../../../../components/Button";
 import { useQAData } from "../../../../../popup/store/qaData";
 
 const QAInDomain = ({ hosting }: { hosting: string }) => {
-  const [domain, setDomain] = useState("");
   const { qaData, getQAData } = useQAData();
+  const [domain, setDomain] = useState(qaData?.domain);
 
   useEffect(() => {
-    getData();
+    getQAData();
   }, []);
-
-  const getData = async () => {
-    const qaData = await getQAData();
-    if (qaData) setDomain(qaData.domain || "");
-  };
+  useEffect(() => {
+    setDomain(qaData?.domain);
+  }, [qaData]);
 
   const onClick = () => {
     message.success(`도메인이 저장되었습니다. QA를 진행합니다.`);
@@ -34,7 +32,11 @@ const QAInDomain = ({ hosting }: { hosting: string }) => {
       <div className="kg_con">
         <div className="kg_title">도메인 확인</div>
         <div className="kg_sub">QA를 시작합니다.</div>
-        <Input placeholder="도메인을 입력해주세요." value={domain} onChange={(e) => setDomain(e.target.value)} />
+        <Input
+          placeholder="도메인을 입력해주세요."
+          value={domain}
+          onChange={(e) => setDomain(e.target.value)}
+        />
         <Button className="mt-3" onClick={onClick}>
           시작
         </Button>

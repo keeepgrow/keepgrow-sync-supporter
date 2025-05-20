@@ -30,7 +30,7 @@ const Wrapper = styled.div`
     width: 23px;
     height: 23px;
     cursor: pointer;
-    z-index: 10000;
+    z-index: 100000;
     &:hover {
       transform: scale(1.1);
     }
