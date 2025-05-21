@@ -12,7 +12,7 @@ const QASaveDomain = ({ hosting }: { hosting: string }) => {
     getQAData();
   }, []);
   useEffect(() => {
-    if (qaData) {
+    if (qaData?.domain) {
       setDomain(qaData.domain);
     }
   }, [qaData]);
