@@ -5,16 +5,13 @@ import { useQAData } from "../../../../../popup/store/qaData";
 
 const QASaveDomain = ({ hosting }: { hosting: string }) => {
   const { qaData, getQAData } = useQAData();
-  const hostname = window.location.hostname;
-  const [domain, setDomain] = useState(hostname);
+  const [domain, setDomain] = useState("");
 
   useEffect(() => {
     getQAData();
   }, []);
   useEffect(() => {
-    if (qaData?.domain) {
-      setDomain(qaData.domain);
-    }
+    setDomain(qaData?.domain || window.location.hostname);
   }, [qaData]);
 
   const onClick = () => {
