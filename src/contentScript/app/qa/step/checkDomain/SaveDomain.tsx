@@ -4,8 +4,18 @@ import Button from "../../../../components/Button";
 import { useQAData } from "../../../../../popup/store/qaData";
 
 const QASaveDomain = ({ hosting }: { hosting: string }) => {
+  const { qaData, getQAData } = useQAData();
   const hostname = window.location.hostname;
   const [domain, setDomain] = useState(hostname);
+
+  useEffect(() => {
+    getQAData();
+  }, []);
+  useEffect(() => {
+    if (qaData) {
+      setDomain(qaData.domain);
+    }
+  }, [qaData]);
 
   const onClick = () => {
     message.success(`도메인이 저장되었습니다. QA를 진행합니다.`);
@@ -15,11 +25,7 @@ const QASaveDomain = ({ hosting }: { hosting: string }) => {
       const _domain = domain.replace("http://", "").replace("https://", "");
       await useQAData.updateDomain(_domain);
       await useQAData.updateStep(2);
-      if (hosting === "cafe24") {
-        window.location.href = `https://${_domain}/member/login.html`;
-      } else if (hosting === "imweb") {
-        window.location.href = `https://${_domain}/login`;
-      }
+      window.open(`https://${_domain}`);
     }, 1000);
   };
   return (
