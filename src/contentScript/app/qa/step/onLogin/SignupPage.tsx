@@ -49,13 +49,16 @@ const QASignupPage = () => {
   };
 
   const onClickSignup = () => {
-    const signupBtnWrapper = document.querySelector("#memberJoin") as HTMLElement;
-    // 여기 안에 P 태그 확인
-    const signupButton = signupBtnWrapper.querySelector("p") as HTMLElement;
+    let signupButton = document.querySelector("#memberJoin p a") as HTMLElement;
+    if (!signupButton) {
+      signupButton = document.querySelector("#memberJoin p") as HTMLElement;
+      return;
+    }
     if (!signupButton) {
       message.error("회원가입 버튼을 찾을 수 없습니다.");
       return;
     }
+
     message.success("회원가입 버튼 클릭");
     signupButton.style.backgroundColor = "yellowgreen";
     setTimeout(() => {

@@ -1,11 +1,13 @@
 export const mappingPageScript = {
   pc: `<!--@layout(/layout/basic/layout.html)-->
-    <style>
+<style>
     #mappingLogin #accountConnect .radioBox li label input:after { background-color: unset; box-sizing: border-box; }
     #mappingLogin { border:1px solid #d7d5d5; font-family:굴림; text-align:center; }
     #mappingLogin .contents { width:401px; margin:0 auto; margin-bottom: 30px; padding:0 0 10px; }
     #mappingLogin .title { margin:28px 0 18px; }
-    #mappingLogin .text { margin:0; padding:28px 0 18px; color:#353535; font-size:12px; }
+    #mappingLogin .title-mapping { margin:28px 0 18px; font-size: 24px; margin: 5px 0 20px; line-height: normal; color: #222; }
+    #mappingLogin .text { margin:0; padding:28px 0 18px; color:#353535; font-size:14px; }
+	#mappingLogin .text-mapping { margin:0; padding:28px 0 18px; color:#353535; font-size:14px; margin-bottom: 15px; color: #222; font-weight: 400; line-height: normal; }
     #mappingLogin .guide { padding: 28px 0 18px; }
     #mappingLogin .radioBox { height:238px;  padding:8px 5px 5px 10px;  border:1px solid #d5d5d5; box-sizing:border-box; text-align:left; }
     #mappingLogin .radioBox ul { margin:0; padding:0; }
@@ -24,7 +26,7 @@ export const mappingPageScript = {
     #mappingLogin:not([data-check="displaynone"]) a .contents-new {display: none;}
 
     </style>
-    <div id="mappingLogin" data-check="{$display_member_id|display}" module="member_loginMapping">
+<div id="mappingLogin" data-check="{$display_member_id|display}" module="member_loginMapping">
     <div class="contents">
         <h2 class="title">카카오 간편가입</h2>
         <h2 class="title-mapping">카카오 연동하기</h2>
@@ -48,12 +50,14 @@ export const mappingPageScript = {
     </div>
 </div>`,
   mobile: `<!--@layout(/layout/basic/layout.html)-->
-    <style>
+<style>
     #mappingLogin #accountConnect .radioBox li label input:after { background-color: unset; box-sizing: border-box; }
     #mappingLogin { border:1px solid #d7d5d5; font-family:굴림; text-align:center; }
     #mappingLogin .contents { width:401px; margin:0 auto; margin-bottom: 30px; padding:0 0 10px; }
-    #mappingLogin .title { margin:28px 0 18px; }
+    #mappingLogin .title { margin:28px 0 18px;}
+	#mappingLogin .title-mapping { margin:28px 0 18px; margin: 0 0 5px; color: #222; font-size: 22px; font-weight: 700; line-height: normal; }
     #mappingLogin .text { margin:0; padding:28px 0 18px; color:#353535; font-size:12px; }
+    #mappingLogin .text-mapping { margin:0; padding:28px 0 18px; color:#353535; margin-bottom: 15px; color: #222; font-size: 14px; font-weight: 400; line-height: normal; }
     #mappingLogin .guide { padding: 28px 0 18px; }
     #mappingLogin .radioBox { height:238px;  padding:8px 5px 5px 10px;  border:1px solid #d5d5d5; box-sizing:border-box; text-align:left; }
     #mappingLogin .radioBox ul { margin:0; padding:0; }

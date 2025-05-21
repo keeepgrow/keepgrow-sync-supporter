@@ -1,6 +1,6 @@
 {
   "name": "kg-helper",
-  "version": "1.0.101",
+  "version": "1.0.0",
   "description": "KG-Helper",
   "scripts": {
     "start": "webpack --watch --progress --config webpack.dev.js",
