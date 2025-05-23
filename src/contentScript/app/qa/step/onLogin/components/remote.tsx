@@ -16,7 +16,7 @@ const OnLoginRemote = ({ hosting }: { hosting: string }) => {
   };
 
   const onClickAgreement = () => {
-    window.location.href = "/order/agreement.html";
+    window.location.href = "/member/agreement.html";
   };
 
   const onClickSignup = () => {
