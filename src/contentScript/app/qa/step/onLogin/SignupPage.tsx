@@ -52,7 +52,6 @@ const QASignupPage = () => {
     let signupButton = document.querySelector("#memberJoin p a") as HTMLElement;
     if (!signupButton) {
       signupButton = document.querySelector("#memberJoin p") as HTMLElement;
-      return;
     }
     if (!signupButton) {
       message.error("회원가입 버튼을 찾을 수 없습니다.");
