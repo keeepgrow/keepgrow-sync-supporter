@@ -4,6 +4,7 @@ import { usePatchData } from "../../../../../../popup/store/patchData";
 import Button from "../../../../../components/Button";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom";
+import { sleep } from "../../../../../utils/utils";
 
 const ImwebLogin2Page = () => {
   const [userInfo, setUserInfo] = useState({ id: "", password: "" });
@@ -20,7 +21,7 @@ const ImwebLogin2Page = () => {
     getUserInfo();
   }, []);
 
-  const onClick = () => {
+  const onClick = async () => {
     const idElement = document.querySelector("#txt_email") as HTMLInputElement;
     const pwElement = document.querySelector("#txt_pass") as HTMLInputElement;
 
@@ -31,9 +32,11 @@ const ImwebLogin2Page = () => {
 
     // 아이디 입력
     idElement.setAttribute("value", userInfo.id);
+    await sleep(500);
 
     // 비밀번호 입력
     pwElement.value = userInfo.password;
+    await sleep(500);
 
     const loginButton = document.querySelector("#btn_login_check") as HTMLButtonElement;
     loginButton?.click();
@@ -45,7 +48,6 @@ const ImwebLogin2Page = () => {
     <Wrapper>
       <div className="kg_con">
         <div className="kg_title">IMWEB 로그인</div>
-        {/* <div className="kg_sub">*부운영자는 직접 로그인 해주세요</div> */}
         <div className="login_box">
           <div>ID : {userInfo?.id || "-"}</div>
           <div>PW : {userInfo?.password || "-"}</div>

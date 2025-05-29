@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { usePatchData } from "../../../../../../popup/store/patchData";
 import Button from "../../../../../components/Button";
+import { sleep } from "../../../../../utils/utils";
 
 const Cafe24LoginPage = () => {
   const [userInfo, setUserInfo] = useState({ id: "", password: "" });
@@ -18,7 +19,7 @@ const Cafe24LoginPage = () => {
     getUserInfo();
   }, []);
 
-  const onClick = () => {
+  const onClick = async () => {
     const idElement = document.querySelector("#mall_id");
     const pwElement = document.querySelector("#userpasswd");
 
@@ -26,8 +27,9 @@ const Cafe24LoginPage = () => {
       return;
     }
     idElement.setAttribute("value", userInfo.id);
+    await sleep(500);
     pwElement.setAttribute("value", userInfo.password);
-
+    await sleep(500);
     const loginButton = document.querySelector(".mButton > button") as HTMLButtonElement;
     loginButton?.click();
   };

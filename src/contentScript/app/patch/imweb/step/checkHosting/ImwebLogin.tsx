@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { usePatchData } from "../../../../../../popup/store/patchData";
 import Button from "../../../../../components/Button";
 import { message } from "antd";
+import { sleep } from "../../../../../utils/utils";
 
 const ImwebLoginPage = () => {
   const [userInfo, setUserInfo] = useState({ id: "", password: "" });
@@ -19,7 +20,7 @@ const ImwebLoginPage = () => {
     getUserInfo();
   }, []);
 
-  const onClick = () => {
+  const onClick = async () => {
     
     const idElement = document.querySelector("#io-email-field-input-2") as HTMLInputElement;
     const pwElement = document.querySelector("#io-password-field-input-3") as HTMLInputElement;
@@ -45,6 +46,7 @@ const ImwebLoginPage = () => {
     // 비밀번호 입력
     pwElement.value = userInfo.password;
     pwElement.click();
+    await sleep(500);
 
     const keyboardEvent2 = new KeyboardEvent("keydown", {
       key: "aasdfakjsdflkjasd",
@@ -54,6 +56,7 @@ const ImwebLoginPage = () => {
 
     pwElement.dispatchEvent(keyboardEvent2);
     pwElement.dispatchEvent(new Event("input", { bubbles: true }));
+    await sleep(500);
 
     const loginButton = document.querySelector("form button[type='submit']") as HTMLButtonElement;
     loginButton?.click();
