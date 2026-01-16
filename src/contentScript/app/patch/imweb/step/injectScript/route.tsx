@@ -24,6 +24,7 @@ const InjectScript = () => {
 
   const urlCheck = () => {
     // login
+    console.log("location", location);
     if (location.includes("imweb.me/login")) {
       setPage(steps.login);
       return;
@@ -33,7 +34,8 @@ const InjectScript = () => {
       setPage(steps.mysite);
       return;
     }
-    if (location.includes("/admin/?type=page")) {
+    console.log("location.endsWith(/admin)", location.endsWith("/admin"));
+    if (location.endsWith("/admin")) {
       const loginElement = document.querySelector(".login");
       if (loginElement) {
         setPage(steps.login2);
@@ -42,6 +44,7 @@ const InjectScript = () => {
       setPage(steps.home);
       return;
     }
+    console.log("location.includes(/admin/config/seo)", location.includes("/admin/config/seo"));
 
     if (location.includes("/admin/config/seo")) {
       setPage(steps.setting);
